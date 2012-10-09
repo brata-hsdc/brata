@@ -1,0 +1,19 @@
+<resources>
+
+    <string name="app_name">BRATA</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_brata_launcher">BRATA</string>
+    <string name="app_title">BRATA</string>
+    <string name="title_activity_request_clue">RequestClueActivity</string>
+    <string name="button_submit">Submit</string>
+    <string name="example_value_1_label">Value 1:</string>
+    <string name="example_value_2_label">Value 2:</string>
+    <string name="example_value_3_label">Value 3:</string>
+    <string name="example_value_4_label">Value 4:</string>
+    <string name="example_value_1">14</string>
+    <string name="example_value_2">26.3095</string>
+    <string name="example_value_3">ABC abc</string>
+    <string name="example_value_4">false</string>
+
+</resources>
