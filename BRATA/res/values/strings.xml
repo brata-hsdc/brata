@@ -15,5 +15,8 @@
     <string name="example_value_2">26.3095</string>
     <string name="example_value_3">ABC abc</string>
     <string name="example_value_4">false</string>
+    <string name="sensor_service_name">BRATA Sensor Service</string>
+    <string name="sensor_service_started">BRATA Sensor Service Started</string>
+    <string name="sensor_service_stopped">BRATA Sensor Service Stopped</string>
 
 </resources>
