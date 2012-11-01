@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/TextLightSensorTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Light Sensor Tool"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <LinearLayout
+        android:id="@+id/LayoutLightReading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/TextLightReadingLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Intensity:"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/TextLightReading"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <ProgressBar
+            android:id="@+id/ProgressLight"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_weight="0" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/LayoutLightGauge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/ImageLightGauge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/light_gauge" />
+
+        <ImageView
+            android:id="@+id/ImageNeedle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/ImageLightGauge"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:adjustViewBounds="true"
+            android:baselineAlignBottom="true"
+            android:src="@drawable/needle" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/LayoutLightButtons"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" android:layout_weight="1">
+
+        <Button
+            android:id="@+id/ButtonStartStop"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:text="Start" />
+
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:gravity="center"
+        android:padding="8dp" >
+
+        <!-- layout_weight is a property specific to LinearLayouts. A weight of
+        0 means to always follow the layout_width and layout_height parameters 
+        without scaling the size relative to other items in the layout. 
+        A weight of 1 combined with a layout width or height of fill_parent means
+        to fill all remaining space with that item. -->
+        
+        <EditText
+            android:id="@+id/EditSubmission"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="text" />
+
+        <Button
+            android:id="@+id/ButtonSubmit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_weight="0"
+            android:text="@string/button_submit" />
+    </LinearLayout>
+
+</LinearLayout>

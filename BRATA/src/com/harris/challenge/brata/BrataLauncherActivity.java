@@ -13,10 +13,12 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.AdapterView.OnItemClickListener;
 import com.harris.challenge.brata.R;
+import com.harris.challenge.brata.tools.LightSensorActivity;
 import com.harris.challenge.brata.tools.NavigationActivity;
 import com.harris.challenge.brata.tools.RangingActivity;
 import com.harris.challenge.brata.tools.RequestClueActivity;
 import com.harris.challenge.brata.tools.SensorExamplesActivity;
+import com.harris.challenge.brata.tools.TimerActivity;
 
 public class BrataLauncherActivity extends Activity implements OnItemClickListener{
 
@@ -33,7 +35,9 @@ public class BrataLauncherActivity extends Activity implements OnItemClickListen
         items.add(new ActivityItem("Send Response",   R.drawable.ic_launcher, new Intent(this, RequestClueActivity.class)));
         items.add(new ActivityItem("Navigate",        R.drawable.ic_launcher, new Intent(this, NavigationActivity.class)));
         items.add(new ActivityItem("Ranging",         R.drawable.ic_launcher, new Intent(this, RangingActivity.class)));
-        items.add(new ActivityItem("Sensor Examples", R.drawable.ic_launcher, new Intent(this, SensorExamplesActivity.class)));
+        items.add(new ActivityItem("Sensor Example",  R.drawable.ic_launcher, new Intent(this, SensorExamplesActivity.class)));
+        items.add(new ActivityItem("Timer Tool",      R.drawable.ic_launcher, new Intent(this, TimerActivity.class)));
+        items.add(new ActivityItem("Light Sensor",    R.drawable.ic_launcher, new Intent(this, LightSensorActivity.class)));
         
         ActivityAdapter activities = new ActivityAdapter(getApplicationContext(), items);
 
@@ -50,6 +54,6 @@ public class BrataLauncherActivity extends Activity implements OnItemClickListen
 	public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
 		ActivityItem item = (ActivityItem) adapter.getItemAtPosition(position);
 
-		startActivity(item.mActivity);		
+		startActivity(item.mActivity);
 	}
 }

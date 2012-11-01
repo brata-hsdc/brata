@@ -27,6 +27,9 @@
         <activity android:name=".tools.SensorExamplesActivity"></activity>
         <activity android:name=".tools.NavigationActivity"></activity>
         <activity android:name=".tools.RangingActivity"></activity>
+        <activity android:name=".tools.TimerActivity"></activity>
+        <activity android:name=".tools.LightSensorActivity"></activity>
+        
        
         <receiver android:name=".SmsReceiver" android:exported="true" > 
 		  <intent-filter android:priority="999"> 

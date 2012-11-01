@@ -22,7 +22,6 @@ public class SensorExamplesActivity extends Activity implements OnClickListener{
         
         Button submitButton = (Button) findViewById(R.id.submitButton);
         submitButton.setOnClickListener(this);
-
     }
     
     @Override
