@@ -3,22 +3,36 @@
  */
 package com.harris.challenge.brata.framework;
 
+import com.harris.challenge.brata.tools.RequestClueActivity;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.telephony.SmsMessage;
+import android.widget.Toast;
 
 /**
- * @author Andrew
+ * Broadcast receiver to intercept SMS messages before they are passed on to
+ * the default SMS app on the device.
+ * 
+ * @author Harris Corporation
  *
  */
 public class SMSReceiver extends BroadcastReceiver {
-
-	/* (non-Javadoc)
-	 * @see android.content.BroadcastReceiver#onReceive(android.content.Context, android.content.Intent)
-	 */
+	
 	@Override
-	public void onReceive(Context context, Intent intent) {
-		// TODO Auto-generated method stub
+	public void onReceive(Context context, Intent intent) 
+	{	
+	     Bundle pudsBundle = intent.getExtras();
+	     Object[] pdus = (Object[]) pudsBundle.get("pdus");
+	     SmsMessage messages =SmsMessage.createFromPdu((byte[]) pdus[0]);    
+	     
+	     // this code will cause a brief message to be displayed on the screen
+	     Toast.makeText(context, "Encoded Clue Received! ", Toast.LENGTH_LONG).show();		     
+	     
+	     //  send's our encoded clue to our RequestClueActivity
+	     RequestClueActivity.DecodeReceivedClue(messages.getMessageBody(), context);
 
 	}
 
