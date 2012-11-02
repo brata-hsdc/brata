@@ -2,44 +2,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-    
-    <!-- The parent layout here is a RelativeLayout. You may want to read up on
+
+    <!--
+    The parent layout here is a RelativeLayout. You may want to read up on
     RelativeLayout, as it is very powerful, but can be tricky if you're not careful.
     All the child views (in this case, a TableLayout and a LinearLayout) inside a
     RelativeLayout must have properties set to define their position inside the 
-    RelativeLayout. -->
-    
-    <!-- Remember, layout_width and layout_height are almost always required. Some
+    RelativeLayout.
+    -->
+
+
+    <!--
+    Remember, layout_width and layout_height are almost always required. Some
     parameters, such as layout_alignParentTop and layout_centerInParent are specific
-    to the type of layout of their parent, in this case a RelativeLayout. -->
+    to the type of layout of their parent, in this case a RelativeLayout.
+    -->
 
-    <!-- layout_margin allows some space between adjacent things on the screen so 
-    they look less cluttered -->
 
-    <!-- Here we are using a table layout. You may use the example table and rows,
+    <!--
+    layout_margin allows some space between adjacent things on the screen so 
+    they look less cluttered
+    -->
+
+
+    <!--
+    Here we are using a table layout. You may use the example table and rows,
     add your own, or use a completely different layout. This is only here as an 
-    example to help you get started.  -->
-    
+    example to help you get started.
+    -->
+
     <TableLayout
+        android:id="@+id/tableLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
         android:layout_margin="8dp" >
-        
-        <!-- In Android, use "dp", which stands for "device pixels" to specify
+
+        <!--
+        In Android, use "dp", which stands for "device pixels" to specify
         sizes for most things. This is a scaled value that makes things look
         correctly spaced on all types of devices, not just the one you're 
-        developing on -->
+        developing on
+        -->
+               
+        <TableRow
+            android:id="@+id/tableRow0"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+	        <EditText
+		        android:id="@+id/beaconPhoneNumText"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="phone"
+                android:imeOptions="actionDone" /> 
+        </TableRow>                                                         
 
         <TableRow
             android:id="@+id/tableRow1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" >
-            
-            <!-- Android recommends using the @string values instead of just a 
+
+            <!--
+            Android recommends using the @string values instead of just a 
             regular quoted strings for labels. The actual values are located in 
-            your project under res->values->strings.xml -->
+            your project under res->values->strings.xml
+            -->
 
             <TextView
                 android:id="@+id/row1name"
@@ -49,11 +79,13 @@
                 android:text="@string/example_value_1_label" >
             </TextView>
 
-            <!-- Remember that you can find a view (item on the screen) from 
+            <!--
+            Remember that you can find a view (item on the screen) from 
             within your java code by using the method findViewByID(). For example,
             the following TextView can be found by calling 
             TextView value1 = (TextView) findViewById(R.id.row1value); 
-            From there, you can manipulate the TextView from within your code.-->
+            From there, you can manipulate the TextView from within your code.
+            -->
 
             <TextView
                 android:id="@+id/row1value"
@@ -63,12 +95,14 @@
             </TextView>
         </TableRow>
 
-        <!-- The number of rows in a TableLayouts depends on how many TableRows you
+        <!--
+        The number of rows in a TableLayouts depends on how many TableRows you
         have inside it. The number of columns is defined by the row that has the 
         most columns. In this example, every row has two columns, so the final 
         table will also only have two columns. There are other ways to achieve a 
         similar look such as several horizontal LinearLayouts inside a vertical
-        LinearLayout, but the TableLayout is more efficient. -->
+        LinearLayout, but the TableLayout is more efficient.
+        -->
 
         <TableRow
             android:id="@+id/tableRow2"
@@ -90,7 +124,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/example_value_2" >
             </TextView>
-        </TableRow>
+        </TableRow>                
 
         <TableRow
             android:id="@+id/tableRow3"
@@ -133,16 +167,34 @@
                 android:text="@string/example_value_4" >
             </TextView>
         </TableRow>
+        
+        <TableRow
+            android:id="@+id/tableRow5"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+	        <Button
+	            android:id="@+id/requestClueButton"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_marginLeft="4dp"
+	            android:layout_weight="0"
+	            android:text="@string/button_request_clue" />
+        </TableRow> 
+       
+        
     </TableLayout>
-    
-    <!-- In a RelativeLayout, by default, there is nothing to keep items from
+
+    <!--
+    In a RelativeLayout, by default, there is nothing to keep items from
     overlapping. If the above table got too large, it would fall behind the
     EditText and Button below. To keep this from happening, you could put
     the TableLayout inside a ScrollView and set the ScrollView's layout_above
     property (which will only work inside a RelativeLayout) to make sure the
     ScrollView is aligned above the LinearLayout below it. Look at the Android
     documentation on RelativeLayout and ScrollView for more information on how
-    to do this if you need it. You might learn something :-) -->
+    to do this if you need it. You might learn something :-)
+    -->
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -150,14 +202,16 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:gravity="center"
-        android:padding="8dp" >
+        android:padding="8dp" >        
 
-        <!-- layout_weight is a property specific to LinearLayouts. A weight of
+        <!--
+        layout_weight is a property specific to LinearLayouts. A weight of
         0 means to always follow the layout_width and layout_height parameters 
         without scaling the size relative to other items in the layout. 
         A weight of 1 combined with a layout width or height of fill_parent means
-        to fill all remaining space with that item. -->
-        
+        to fill all remaining space with that item.
+        -->
+
         <EditText
             android:id="@+id/submissionText"
             android:layout_width="fill_parent"
@@ -173,5 +227,6 @@
             android:layout_weight="0"
             android:text="@string/button_submit" />
     </LinearLayout>
+
 
 </RelativeLayout>

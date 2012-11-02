@@ -18,5 +18,6 @@
     <string name="sensor_service_name">BRATA Sensor Service</string>
     <string name="sensor_service_started">BRATA Sensor Service Started</string>
     <string name="sensor_service_stopped">BRATA Sensor Service Stopped</string>
+    <string name="button_request_clue">send fixed msg btn (no typing)</string>
 
 </resources>

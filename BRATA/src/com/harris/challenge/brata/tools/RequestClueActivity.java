@@ -79,18 +79,21 @@ public class RequestClueActivity extends Activity implements OnClickListener{
         
         // You can also set the size of text in a TextView
         TextView value5 = (TextView) findViewById(R.id.row4value);
-        value5.setText(myClue);  // my clue should by default be "BIG ???"
+        value5.setText("BIG"); 
         value5.setTextSize(24f);
         
         // we are also going to assign R.id.row4value to another variable
         // this is a special static variable that will help our SMSReceiver
         // class send data to this class
-        clueTextView =(TextView)findViewById(R.id.row4value);
+        ResponseTextView =(TextView)findViewById(R.id.row4value);
         
         // setHint just changes the grey text that shows up before you type
         // anything into an EditText box.
         EditText submission = (EditText) findViewById(R.id.submissionText);
         submission.setHint("Type submission here");
+        
+        EditText phoneNumber = (EditText) findViewById(R.id.beaconPhoneNumText);
+        phoneNumber.setHint("Beacon Phone Number");        
         
         // setOnClickListener tells the button whose onClick to call when
         // you click on it. Here, we're telling it to call the onClick in 
@@ -104,6 +107,9 @@ public class RequestClueActivity extends Activity implements OnClickListener{
         // they're important!
         Button submitButton = (Button) findViewById(R.id.submitButton);
         submitButton.setOnClickListener(this);
+        
+        Button requestClueButton = (Button) findViewById(R.id.requestClueButton);
+        requestClueButton.setOnClickListener(this);        
     }
     
     /* (non-Javadoc)
@@ -133,6 +139,14 @@ public class RequestClueActivity extends Activity implements OnClickListener{
     		inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
                        InputMethodManager.HIDE_NOT_ALWAYS);
     		break;
+    		
+    	case R.id.requestClueButton:
+    		
+    		// We may want to make a button that will always send a common/repetitive message
+    		// that we know we are going to have to send dozens of times. (for those
+    		// of us who don't feel like typing it out on a keyboard each time...
+    		submitText("Give me a clue man!!!!!");    		
+    		break;    		
     		
     		// Here you could add more cases for any other buttons you may
     		// add. Make sure to put a break; after each case!
@@ -177,12 +191,12 @@ public class RequestClueActivity extends Activity implements OnClickListener{
         sms.sendTextMessage(BeaconPhoneNumber, null, MyRequestMessage, null, null);
     }
     
-    // These two variables should always contain the last decoded clue
+    // These two variables should always contain the last decoded response
     // (even if you leave and return to this activity).
     // If you would like to keep track of more than just the last one,
-    // you may have to implement some type of clue logger.    
-    static String myClue = "BIG ???";  
-    static TextView clueTextView = null;
+    // you may have to implement some type of response logger.    
+    static String myResponse = "N/A";  
+    static TextView ResponseTextView = null;
     
     /**
      * this function will be automatically called each time the beacon sends a message
@@ -191,11 +205,11 @@ public class RequestClueActivity extends Activity implements OnClickListener{
      * @param EncodedClue
      * 		the encoded clue
      */
-    public static void DecodeReceivedClue(String encodedClue, Context context)
+    public static void DecodeReceivedMsg(String encodedMsg, Context context)
     {
-    	if (clueTextView != null)
+    	if (ResponseTextView != null)
     	{
-	        String decodedClue = encodedClue;	        	       
+	        String decodedMsg = encodedMsg;	        	       
 	        
 	        /*
 	         * 
@@ -206,14 +220,24 @@ public class RequestClueActivity extends Activity implements OnClickListener{
 	         * 
 	         */
 	        
-	        myClue = decodedClue;
+	        myResponse = decodedMsg;
 	         
-	        clueTextView.setText(myClue);
+	        ResponseTextView.setText(myResponse);
 	        
 		     // this code will cause a brief message to be displayed on the screen
-		     Toast.makeText(context, "Clue Decoded : "+ myClue, 
+		     Toast.makeText(context, "Msg Decoded : "+ myResponse, 
 		    		        Toast.LENGTH_LONG).show();		        
     	}
          
-    }    
+    } 
+    
+    /**
+     * Gets called when back button is pressed
+     *      
+     */    
+    public void onBackPressed()
+    {
+    	ResponseTextView = null;
+    	finish();
+    }     
 }

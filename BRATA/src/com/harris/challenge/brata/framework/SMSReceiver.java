@@ -4,6 +4,7 @@
 package com.harris.challenge.brata.framework;
 
 import com.harris.challenge.brata.tools.RequestClueActivity;
+import com.harris.challenge.brata.tools.SubmitResponseActivity;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -29,10 +30,12 @@ public class SMSReceiver extends BroadcastReceiver {
 	     SmsMessage messages =SmsMessage.createFromPdu((byte[]) pdus[0]);    
 	     
 	     // this code will cause a brief message to be displayed on the screen
-	     Toast.makeText(context, "Encoded Clue Received! ", Toast.LENGTH_LONG).show();		     
+	     Toast.makeText(context, "Encoded Msg Received! ", Toast.LENGTH_LONG).show();		     
 	     
-	     //  send's our encoded clue to our RequestClueActivity
-	     RequestClueActivity.DecodeReceivedClue(messages.getMessageBody(), context);
+	     //  send's our encoded clue to our RequestClueActivity & SubmitRequestActivity
+	     //  only the current active activity will process it...	     
+	     RequestClueActivity.DecodeReceivedMsg(messages.getMessageBody(), context);
+	     SubmitResponseActivity.DecodeReceivedMsg(messages.getMessageBody(), context);	     
 
 	}
 

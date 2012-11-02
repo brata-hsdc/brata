@@ -30,6 +30,7 @@
         <activity android:name=".tools.RangingActivity"></activity>
         <activity android:name=".tools.TimerActivity"></activity>
         <activity android:name=".tools.LightSensorActivity"></activity>
+        <activity android:name=".tools.SubmitResponseActivity"></activity>
         
         <receiver android:name=".framework.SMSReceiver" android:exported="true" > 
 		  <intent-filter android:priority="999"> 
