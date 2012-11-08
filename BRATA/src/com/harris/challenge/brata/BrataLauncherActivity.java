@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.AdapterView.OnItemClickListener;
 import com.harris.challenge.brata.R;
+import com.harris.challenge.brata.framework.GPSService;
 import com.harris.challenge.brata.tools.LightSensorActivity;
 import com.harris.challenge.brata.tools.NavigationActivity;
 import com.harris.challenge.brata.tools.RangingActivity;
@@ -44,6 +45,14 @@ public class BrataLauncherActivity extends Activity implements OnItemClickListen
 
         activityGrid.setAdapter(activities);
         activityGrid.setOnItemClickListener(this);
+        
+        startService(new Intent(this, GPSService.class));
+    }
+    
+    @Override
+    protected void onDestroy() {
+    	stopService(new Intent(this, GPSService.class));
+    	super.onDestroy();
     }
 
     @Override
