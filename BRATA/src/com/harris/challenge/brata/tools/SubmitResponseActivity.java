@@ -1,10 +1,10 @@
 package com.harris.challenge.brata.tools;
 
 import com.harris.challenge.brata.R;
-import android.os.Bundle;
+
 import android.app.Activity;
+import android.os.Bundle;
 import android.content.Context;
-import android.graphics.Color;
 import android.telephony.SmsManager;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,7 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * This is an example activity for requesting clues from the clue server. This
+ * This is an example activity for submitting responses to the beacon server. This
  * example doesn't actually do any useful work for you, it just provides a few
  * input and output examples so you can quickly try out your design.
  * 
@@ -25,8 +25,8 @@ import android.widget.Toast;
  * 
  * @author Harris Corporation
  */
-public class RequestClueActivity extends Activity implements OnClickListener{
-
+public class SubmitResponseActivity extends Activity implements OnClickListener{
+	
     /* (non-Javadoc)
      * @see android.app.Activity#onCreate(android.os.Bundle)
      * 
@@ -40,60 +40,25 @@ public class RequestClueActivity extends Activity implements OnClickListener{
         //   res->layout->activity_request_clue.xml
         // to our Activity. We can now find views within that layout and
         // manipulate them. Don't try to call findViewById() before this!
-        setContentView(R.layout.activity_request_clue);
-        
-        
+        setContentView(R.layout.activity_submit_response);
+                
         // First, grab a TextView out of the layout and set it's text to
         // something else
-        TextView value1Label = (TextView) findViewById(R.id.row1name);
+        TextView value1Label = (TextView) findViewById(R.id.row1name_2);
         value1Label.setText("Request:");
         
-        TextView value1 = (TextView) findViewById(R.id.row1value);
-        value1.setText("Ready!");
+        TextView value1 = (TextView) findViewById(R.id.row1value_2);
+        value1.setText("Ready!");      
         
-        TextView value2Label = (TextView) findViewById(R.id.row2name);
-        value2Label.setText("Value 2:");
-        
-        // We can change the background color of the text by using 
-        // setBackgroundColor
-        TextView value2 = (TextView) findViewById(R.id.row2value);
-        value2.setText("Hello World!");
-        value2.setBackgroundColor(Color.DKGRAY);
-        
-        TextView value3Label = (TextView) findViewById(R.id.row3name);
-        value3Label.setText("Value 3:");
-        
-        // We can also change the color of the text by using setTextColor
-        TextView value3 = (TextView) findViewById(R.id.row3value);
-        value3.setText("Oh no!");
-        value3.setTextColor(Color.RED);
-        
-        // setVisibility lets you hide or show an entire view. Use 
-        // View.INVISIBLE to hide a view and View.VISIBLE to bring it back.
-        // There is also View.GONE, which is similar to INVISIBLE, but means
-        // the view won't be considered when laying out other views, which
-        // could affect how the rest of your layout looks.
-        TextView value4Label = (TextView) findViewById(R.id.row4name);
-        value4Label.setText("Invisible");
-        value4Label.setVisibility(View.INVISIBLE);
-        
-        // You can also set the size of text in a TextView
-        TextView value5 = (TextView) findViewById(R.id.row4value);
-        value5.setText("BIG"); 
-        value5.setTextSize(24f);
-        
-        // we are also going to assign R.id.row4value to another variable
+        // we are also going to assign R.id.row1value_2 to another variable
         // this is a special static variable that will help our SMSReceiver
         // class send data to this class
-        ResponseTextView =(TextView)findViewById(R.id.row4value);
+        ResponseTextView =(TextView)findViewById(R.id.row1value_2);
         
         // setHint just changes the grey text that shows up before you type
         // anything into an EditText box.
-        EditText submission = (EditText) findViewById(R.id.submissionText);
-        submission.setHint("Type submission here");
-        
-        EditText phoneNumber = (EditText) findViewById(R.id.beaconPhoneNumText);
-        phoneNumber.setHint("Beacon Phone Number");        
+        EditText submission = (EditText) findViewById(R.id.submissionText_2);
+        submission.setHint("Type submission here");           
         
         // setOnClickListener tells the button whose onClick to call when
         // you click on it. Here, we're telling it to call the onClick in 
@@ -105,11 +70,8 @@ public class RequestClueActivity extends Activity implements OnClickListener{
         // in the class signature at the top of this Activity class.
         // If this doesn't make sense, read up on Java interfaces and why
         // they're important!
-        Button submitButton = (Button) findViewById(R.id.submitButton);
-        submitButton.setOnClickListener(this);
-        
-        Button requestClueButton = (Button) findViewById(R.id.requestClueButton);
-        requestClueButton.setOnClickListener(this);        
+        Button submitButton = (Button) findViewById(R.id.submitButton_2);
+        submitButton.setOnClickListener(this);      
     }
     
     /* (non-Javadoc)
@@ -122,7 +84,7 @@ public class RequestClueActivity extends Activity implements OnClickListener{
     	// switch() on the button's view id.
     	switch(view.getId()) {
     	
-    	case R.id.submitButton:
+    	case R.id.submitButton_2:
     		// Get the text we want to submit
     		String textToSubmit = getTextToSubmit();
     		
@@ -139,14 +101,7 @@ public class RequestClueActivity extends Activity implements OnClickListener{
     		inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
                        InputMethodManager.HIDE_NOT_ALWAYS);
     		break;
-    		
-    	case R.id.requestClueButton:
-    		
-    		// We may want to make a button that will always send a common/repetitive message
-    		// that we know we are going to have to send dozens of times. (for those
-    		// of us who don't feel like typing it out on a keyboard each time...
-    		submitText("Give me a clue man!!!!!");    		
-    		break;    		
+    		 		
     		
     		// Here you could add more cases for any other buttons you may
     		// add. Make sure to put a break; after each case!
@@ -163,7 +118,7 @@ public class RequestClueActivity extends Activity implements OnClickListener{
     	// your larger tasks into smaller chunks to logically break down the
     	// problem into simpler and easier-to-read pieces.
     	
-        EditText submission = (EditText) findViewById(R.id.submissionText);
+        EditText submission = (EditText) findViewById(R.id.submissionText_2);
         return submission.getText().toString();
     }
     
@@ -174,7 +129,7 @@ public class RequestClueActivity extends Activity implements OnClickListener{
      * 		the text to be submitted
      */
     private void submitText(String text) {
-        TextView value2 = (TextView) findViewById(R.id.row2value);
+        TextView value2 = (TextView) findViewById(R.id.row1name_2);
         
         // this will cause the message you here you can see the message you sent
         value2.setText(text);
@@ -229,15 +184,16 @@ public class RequestClueActivity extends Activity implements OnClickListener{
 		    		        Toast.LENGTH_LONG).show();		        
     	}
          
-    } 
-    
+    }
+        
     /**
      * Gets called when back button is pressed
      *      
-     */    
+     */     
     public void onBackPressed()
     {
     	ResponseTextView = null;
     	finish();
-    }     
+    }    
+
 }
