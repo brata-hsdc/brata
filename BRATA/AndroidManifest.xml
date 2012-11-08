@@ -30,6 +30,8 @@
         <activity android:name=".tools.TimerActivity"></activity>
         <activity android:name=".tools.LightSensorActivity"></activity>
         
+        <service android:name=".framework.GPSService" />
+        
        
         <receiver android:name=".SmsReceiver" android:exported="true" > 
 		  <intent-filter android:priority="999"> 
