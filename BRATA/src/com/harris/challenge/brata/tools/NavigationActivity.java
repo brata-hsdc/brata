@@ -115,15 +115,6 @@ public class NavigationActivity extends Activity implements OnClickListener, GPS
         bindService(serviceIntent, this, Context.BIND_AUTO_CREATE);
 	}
 	
-//	/**
-//	 * This activity goes to the background.  The activity is running and active.
-//	 */
-//	@Override
-//	protected void onPause() {
-//      unbindService(this);
-//		super.onPause();
-//	}
-
 	/**
 	 * This activity returns to the foreground.  The activity becomes active.
 	 */
