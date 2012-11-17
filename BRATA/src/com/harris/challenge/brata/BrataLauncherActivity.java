@@ -20,6 +20,7 @@ import com.harris.challenge.brata.tools.RequestClueActivity;
 import com.harris.challenge.brata.tools.SensorExamplesActivity;
 import com.harris.challenge.brata.tools.TimerActivity;
 import com.harris.challenge.brata.tools.SubmitResponseActivity;
+import com.harris.challenge.brata.tools.InclinationActivity;
 
 public class BrataLauncherActivity extends Activity implements OnItemClickListener{
 
@@ -39,6 +40,7 @@ public class BrataLauncherActivity extends Activity implements OnItemClickListen
         items.add(new ActivityItem("Sensor Example",  R.drawable.ic_launcher, new Intent(this, SensorExamplesActivity.class)));
         items.add(new ActivityItem("Timer Tool",      R.drawable.ic_launcher, new Intent(this, TimerActivity.class)));
         items.add(new ActivityItem("Light Sensor",    R.drawable.ic_launcher, new Intent(this, LightSensorActivity.class)));
+        items.add(new ActivityItem("Inclination Sensor",    R.drawable.ic_launcher, new Intent(this, InclinationActivity.class)));
         
         ActivityAdapter activities = new ActivityAdapter(getApplicationContext(), items);
 
