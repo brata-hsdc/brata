@@ -79,16 +79,32 @@ public class TimerActivity extends Activity {
         button_submit.setOnClickListener(submit);
     }
     
+    @Override
+	protected void onDestroy() {
+		timer_started = false;
+		super.onDestroy();
+	}
+    
+    /**
+     * React to pressing the reset button
+     */ 
     View.OnClickListener reset = new OnClickListener() {
         public void onClick(View v) {
+        	// On reset simply set the timer text to zeroes 
+        	// and reset the starting point in time to now
         	start_time = (new Date()).getTime();
         	timer_zero_reset = true;
         	timer.setText("00:00:000");
         }
     };
     
+    /**
+     * React to pressing the start/stop button
+     */    
 	View.OnClickListener startStopPressed = new OnClickListener() {
 		public void onClick(View v) {
+			// If the timer is running then stop the timer
+			// and recorded the paused point in time
 			if(timer_started)
 			{
 				pause_time = (new Date()).getTime();
@@ -96,23 +112,45 @@ public class TimerActivity extends Activity {
 				button_start_stop.setText("Start");
 			}
 			else
-			{
+			{// If the timer is stopped then start the timer
+				
 				if(timer_zero_reset)
-				{
+				{// set the starting point in time to now if the timer was previously reset
 					start_time = (new Date()).getTime();
 				}
 				else
-				{
+				{	// since the timer was pause the start reference point in time 
+					// needs to be adjusted for the time spent paused
 					start_time += (new Date()).getTime() - pause_time;
 				}
 				
 				timer_started = true;
 				timer_zero_reset = false;
 				button_start_stop.setText("Stop");
+				// post event to thread to execute an update to the UI with 0 wait time
 				handler.postDelayed(update, 0);
 			}
 		}
 	};
+	
+    /**
+     * This function is used to periodically update the UI
+     */    
+	private final Runnable update = new Runnable() {
+    	public void run() {
+    		// if timer is running then update the text for the timer
+    		if(timer_started)
+    		{
+    			long timer_diff = (new Date()).getTime() - start_time;
+    			timer.setText(String.format("%02d", timer_diff/MINUTES_TO_MILLISECONDS)+":"
+    					+ String.format("%02d", (timer_diff%MINUTES_TO_MILLISECONDS) / SECONDS_TO_MILLISECONDS)+":"
+    					+ String.format("%03d", timer_diff%SECONDS_TO_MILLISECONDS));
+    			// post this function again to the thread to run 80 milliseconds in the future
+    			handler.postDelayed(update, 80);
+    		}
+        }
+	};
+	
 	
     View.OnClickListener submit = new OnClickListener() {
         public void onClick(View v) {
@@ -155,24 +193,4 @@ public class TimerActivity extends Activity {
     private void submitText(String text) {
         // should confirm submission then submit
     }
-	
-	private final Runnable update = new Runnable() {
-    	public void run() {
-    		if(timer_started)
-    		{
-    			long timer_diff = (new Date()).getTime() - start_time;
-    			timer.setText(String.format("%02d", timer_diff/MINUTES_TO_MILLISECONDS)+":"
-    					+ String.format("%02d", (timer_diff%MINUTES_TO_MILLISECONDS) / SECONDS_TO_MILLISECONDS)+":"
-    					+ String.format("%03d", timer_diff%SECONDS_TO_MILLISECONDS));
-    			handler.postDelayed(update, 80);
-    		}
-        }
-	};
-	
-    
-	@Override
-	protected void onDestroy() {
-		timer_started = false;
-		super.onDestroy();
-	}
 }

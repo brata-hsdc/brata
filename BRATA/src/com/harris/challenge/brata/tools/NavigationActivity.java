@@ -4,28 +4,35 @@
 package com.harris.challenge.brata.tools;
 
 import com.harris.challenge.brata.R;
+import com.harris.challenge.brata.framework.GPSService;
+import com.harris.challenge.brata.framework.GPSService.GPSServiceListener;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * @author Andrew
  * 
  */
-public class NavigationActivity extends Activity implements OnClickListener {
+public class NavigationActivity extends Activity implements OnClickListener, GPSServiceListener{
 
+	private GPSService gpsService = null;
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -99,30 +106,33 @@ public class NavigationActivity extends Activity implements OnClickListener {
 		// they're important!
 		Button submitButton = (Button) findViewById(R.id.submitButton);
 		submitButton.setOnClickListener(this);
-
+		
+		// The GPS Service runs independently of the applications 
+		// activities.  The bindService() function allows this 
+		// activity to interact to the GPS service to retrieve location  
+		// information. 
+		Intent serviceIntent = new Intent(this, GPSService.class);
+        bindService(serviceIntent, this, Context.BIND_AUTO_CREATE);
 	}
-
-	@Override
-	protected void onPause() {
-		// Acquire a reference to the system Location Manager
-		LocationManager locationManager = (LocationManager) this
-				.getSystemService(Context.LOCATION_SERVICE);
-		// Register the listener with the Location Manager to receive location
-		// updates
-		locationManager.removeUpdates(locationListener);
-		super.onPause();
-	}
-
+	
+	/**
+	 * This activity returns to the foreground.  The activity becomes active.
+	 */
 	@Override
 	protected void onResume() {
-		// Acquire a reference to the system Location Manager
-		LocationManager locationManager = (LocationManager) this
-				.getSystemService(Context.LOCATION_SERVICE);
-		// Unregister the listener with the Location Manager to stop receiving
-		// location updates
-		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0,
-				0, locationListener);
+		// Rebind activity to gps service
+		Intent mServiceIntent = new Intent(this, GPSService.class);
+        bindService(mServiceIntent, this, Context.BIND_AUTO_CREATE);
 		super.onResume();
+	}
+	
+	/**
+	 * The activity is finished running
+	 */
+	@Override
+	protected void onStop() {
+		super.onStop();
+		unbindService(this);
 	}
 
 	/*
@@ -183,37 +193,78 @@ public class NavigationActivity extends Activity implements OnClickListener {
 		TextView value2 = (TextView) findViewById(R.id.row2value);
 		value2.setText(text);
 	}
-
-	/*
-	 * This section
+	
+	
+	
+	
+	
+	// As a GPSServiceListener this activity must implement the following functions
+	// 		onServiceConnected()
+	//		onServiceDisconnected()
+	//		onLocationChanged()
+	/**
+	 * Called when the connection with the GPS service is established
+	 * 
+	 * @param ComponentName
+	 * @param service binder
 	 */
-	// Define a listener that responds to location updates
-	LocationListener locationListener = new LocationListener() {
-		public void onLocationChanged(Location location) {
-			// Called when a new location is found by the network location
-			// provider.
-			makeUseOfNewLocation(location);
-		}
+	@Override
+    public void onServiceConnected(ComponentName className, IBinder binder) {
+        // Because we have bound to an explicit
+        // service that is running in our own process, we can
+        // cast its IBinder to a concrete class and directly access it.
+		Toast.makeText(getBaseContext(), "GPS service connected", Toast.LENGTH_SHORT).show();
+		GPSService.LocalBinder gpsBinder = (GPSService.LocalBinder) binder;
+		GPSService gpsService = gpsBinder.getService();
+		gpsService.addGPSListener(NavigationActivity.this);
+    }
 
-		public void onStatusChanged(String provider, int status, Bundle extras) {
-		}
-
-		public void onProviderEnabled(String provider) {
-		}
-
-		public void onProviderDisabled(String provider) {
-		}
-	};
+	/**
+	 * Called when the connection with the GPS service disconnects
+	 * 
+	 * @param classname
+	 */
+    @Override
+    public void onServiceDisconnected(ComponentName className) {
+    	if(gpsService != null) 
+    	{
+    		gpsService.removeGPSListener(NavigationActivity.this);
+    	}
+    }
 
 	/**
 	 * Takes action on each new location update
 	 * 
 	 * @param location 
 	 */
-	private void makeUseOfNewLocation(Location location) {
+	@Override
+	public void onLocationChanged(Location location) {
 		double latitude = location.getLatitude();
 		double longitude = location.getLongitude();
 		double altitude = location.getAltitude();
+		float accuracy = location.getAccuracy();
+		
+		// Use Toast to display a messages briefly. It is a great tool
+		// for debugging.  It is useful for determining the details of
+		// an event such as a button press as well as when it occurred.  
+		// However Android's Log tool is a better alternative for
+		// debugging multiple recurring events and application crashes. 
+		// Set this variable to true to view the GPS toast message.
+		boolean GPS_show_updates = true;
+		if(GPS_show_updates)
+		{
+			Toast.makeText(getBaseContext(), 
+				"Latitude: "+latitude+
+				"; Longitude: "+longitude+
+				"; Altitude: "+altitude+
+				"; Accuracy: "+accuracy,
+                Toast.LENGTH_SHORT).show();
+		}
+		Log.i("BRATA", 
+			"Latitude: "+latitude+
+			"; Longitude: "+longitude+
+			"; Altitude: "+altitude+
+			"; Accuracy: "+accuracy);
 		
 		//TODO:  Use the location coordinates to do something useful
 		
@@ -228,5 +279,4 @@ public class NavigationActivity extends Activity implements OnClickListener {
 	private void updateUI() {
 		
 	}
-
 }
