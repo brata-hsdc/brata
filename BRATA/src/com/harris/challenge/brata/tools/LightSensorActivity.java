@@ -25,21 +25,26 @@ import android.widget.Toast;
 
 public class LightSensorActivity extends Activity implements SensorEventListener {
 	
-	boolean sensor_started = false;
-	int light_value = 0;
-	ImageView needle;
-	ProgressBar light_bar;
-	TextView light_text;
-	Button button_start_stop;
-	Button button_submit;
-	EditText edit_submission;
+	// Declare layout elements and widgets
+	private ImageView needle;
+	private ProgressBar light_bar;
+	private TextView light_text;
+	private Button button_start_stop;
+	private Button button_submit;
+	private EditText edit_submission;
 	
-	SensorManager sm;
-	Handler handler = new Handler();
+	private boolean sensor_started = false;
+	private int light_value = 0;
+	
+	private SensorManager sm;
+	private Handler handler = new Handler();
 	
 	final float min_guage_angle = -48; 
 	final float max_guage_angle = 48;
 		
+	/**
+     * This will be called whenever this activity is created.
+     */  
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +55,7 @@ public class LightSensorActivity extends Activity implements SensorEventListener
         // manipulate them. Don't try to call findViewById() before this!
         setContentView(R.layout.light_sensor);
 		
-        // setup activity widgets
+        // Setup activity widgets
 		sm = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         needle = (ImageView) findViewById(R.id.ImageNeedle);        
         light_bar = (ProgressBar) findViewById(R.id.ProgressLight);
@@ -67,8 +72,25 @@ public class LightSensorActivity extends Activity implements SensorEventListener
         button_submit.setOnClickListener(submit);
     }
     
+    /**
+     * This will be called whenever this activity finishes and is destroyed.
+     * Use this function to cleanup anything your activity has done
+     */  
+	@Override
+	protected void onDestroy() {
+		// Stop sensor from updating in the future and unregister for light sensor updates
+		sensor_started = false;
+    	sm.unregisterListener(LightSensorActivity.this);
+		super.onDestroy();
+	}
+    
+    /**
+     * Function to process LightSensor Start/Stop button presses
+     */    
 	View.OnClickListener startStopPressed = new OnClickListener() {
 		public void onClick(View v) {
+			// If is sensor is running when button is pressed then stop it by 
+			// unregistering for lightsensor updates
 			if(sensor_started)
 			{
 				sensor_started = false;
@@ -77,25 +99,108 @@ public class LightSensorActivity extends Activity implements SensorEventListener
 			}
 			else
 			{
+				// Set sensor to running
 				sensor_started = true;
 				button_start_stop.setText("Stop");
 				
-			    // Check if there is at least one light sensor
+			    // Check if there is at least one light sensor then register for updates
 			    if (sm.getSensorList(Sensor.TYPE_LIGHT).size() == 0)
 			    {
 			    	Toast.makeText(getBaseContext(), "No light sensor installed", 2).show();
 			    }
 			    else
 			    {
+			    	// Register this activity to the sensor for updates
 			        sm.registerListener(LightSensorActivity.this, sm.getSensorList(Sensor.TYPE_LIGHT).get(0), SensorManager.SENSOR_DELAY_GAME);
 			    }
 				
+			    // post the update function to this activities thread run with 0 wait time
 				handler.postDelayed(update, 0);
 			}
 		}
 	};
 	
-    View.OnClickListener submit = new OnClickListener() {
+    // This activity implements the SensorEventListener interface so that it may 
+	// register itself for LightSensor updates.  It is required to implement the 
+	// following two functions:
+	//		
+	//
+	/**
+     * This function is used to update the layout elements with a new intensity value
+     */    
+	private final Runnable update = new Runnable() {
+    	public void run() {
+    		if(sensor_started)
+    		{
+    			// The light intensity value which varies exponentially is transformed 
+    			// into a simpler gauge value which varies linearly from 0-100
+	    		float gauge_value = (float) (Math.log10((double)light_value) * 25.0f);
+	    		if(gauge_value > 100)
+	    			gauge_value = 100;
+	    		if(gauge_value < 0)
+	    			gauge_value = 0;
+	    		
+	    		// The gauge value is used to determine the angle of the needle image 
+	    		// which is tuned to line up and rotate correctly with the gauge image
+	    		// A simple way to rotate an image to to use the RotationAnimation with 0 delay
+	    		float gauge_angle = gauge_value / 100.0f * (max_guage_angle - min_guage_angle) + min_guage_angle;
+	    		RotateAnimation anim = new RotateAnimation(gauge_angle, gauge_angle,
+	                    Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,1.09f);
+	    		// Set options to adjust the animation
+	    		anim.setDuration(0);
+	            anim.setFillEnabled(true);
+	    		anim.setFillBefore(true);
+	    		anim.setFillAfter(true);
+	            needle.startAnimation(anim);
+	            
+	            // Also set progress bar to reflect light intensity
+	            light_bar.setProgress((int) gauge_value);
+	            
+	            // Display the actual light intensity value in a text view
+	            light_text.setText(String.valueOf(light_value));
+	            
+	            // Post this function to to the thread to update the UI again after 80 milliseconds
+	    		handler.postDelayed(update, 80);
+    		}
+        }
+	};
+	
+	
+	
+    // This activity implements the SensorEventListener interface so that it may 
+	// register itself for LightSensor updates.  It is required to implement the 
+	// following two functions:
+	//		onSensorChanged()
+	//		onAccuracyChanged()
+	
+	/**
+     * When the Android light sensor detects that light intensity has changed it will 
+     * call this function on all registered listeners with parameters that contain 
+     * the new light value.
+     */
+	@Override
+	public void onSensorChanged(SensorEvent event) {
+        if (event.sensor.getType() == Sensor.TYPE_LIGHT) {
+        	light_value = (int) event.values[0];
+        }
+	}
+	
+	/**
+     * Function called on all listeners for a sensor when accuracy has changed
+     */ 
+	@Override
+	public void onAccuracyChanged(Sensor sensor, int accuracy) {
+		// TODO Auto-generated method stub
+	}
+	
+
+	
+	
+	
+	
+	
+	
+	View.OnClickListener submit = new OnClickListener() {
         public void onClick(View v) {
         	String textToSubmit = getTextToSubmit();
     		
@@ -136,51 +241,4 @@ public class LightSensorActivity extends Activity implements SensorEventListener
     private void submitText(String text) {
     	// should confirm submission then submit
     }
-	
-	private final Runnable update = new Runnable() {
-    	public void run() {
-    		if(sensor_started)
-    		{
-	    		float gauge_value = (float) (Math.log10((double)light_value) * 25.0f);
-	    		if(gauge_value > 100)
-	    			gauge_value = 100;
-	    		if(gauge_value < 0)
-	    			gauge_value = 0;
-	    		
-	    		float gauge_angle = gauge_value / 100.0f * (max_guage_angle - min_guage_angle) + min_guage_angle;
-	    		RotateAnimation anim = new RotateAnimation(gauge_angle, gauge_angle,
-	                    Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,1.09f);
-	    		
-	    		anim.setDuration(0);
-	            anim.setFillEnabled(true);
-	    		anim.setFillBefore(true);
-	    		anim.setFillAfter(true);
-	            needle.startAnimation(anim);
-	            
-	            light_bar.setProgress((int) gauge_value);
-	            light_text.setText(String.valueOf(light_value));
-	            
-	    		handler.postDelayed(update, 80);
-    		}
-        }
-	};
-	
-	@Override
-	public void onSensorChanged(SensorEvent event) {
-        if (event.sensor.getType() == Sensor.TYPE_LIGHT) {
-        	light_value = (int) event.values[0];
-        }
-	}
-	
-	@Override
-	public void onAccuracyChanged(Sensor sensor, int accuracy) {
-		// TODO Auto-generated method stub
-	}
-	
-	@Override
-	protected void onDestroy() {
-		sensor_started = false;
-    	sm.unregisterListener(LightSensorActivity.this);
-		super.onDestroy();
-	}
 }

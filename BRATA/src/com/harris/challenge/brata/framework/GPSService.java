@@ -23,6 +23,8 @@ public class GPSService extends Service {
     private Location location;
     private MyLocationListener locationListener;
     private Set<GPSServiceListener> listeners;
+    private long GPSUpdateDelay = 3000;
+    private long minDistanceMeters = 15;
     private int lastStatus = 0;
     private static boolean showingDebugToast = false;
     private final IBinder mBinder = (IBinder) new LocalBinder();
@@ -42,11 +44,9 @@ public class GPSService extends Service {
         // Retrieve the Android system LocationService and request location
         // updates to the GPS Provider by providing the Location Listener.
         // Will receive updates every 15 seconds
-        long minTimeMillis = 15000;
-        long minDistanceMeters = 15;
         lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 
-                        minTimeMillis, 
+        				GPSUpdateDelay, 
                         minDistanceMeters,
                         locationListener);
         

@@ -40,21 +40,40 @@ public class QRCodeReaderActivity extends Activity {
         // to our Activity. We can now find views within that layout and
         // manipulate them. Don't try to call findViewById() before this!
         setContentView(R.layout.qr_reader_activity);
+        
+        /*
+		 * This activity needs layout elements to start a QR scan and display the result
+		 * 
+		 * Initialize widgets from layout resources here using findViewById().
+		 * For functional widgets assign the widgets an action listener function 
+		 * defined by this activity.    
+		 */
     }
     
+    /*
+	 * The framework provides the capability to launch a QR Code Scanner.
+	 * In order to invoke the QR Code Scanner call this function.
+	 */
     private void scanCode()
     {
+    	// This function automatically starts a scanner activity
     	IntentIntegrator.initiateScan(QRCodeReaderActivity.this);
     }
     
+    /*
+	 * After the QR Code Scanner has read a code successfully it will finish
+	 * and return to this activity.  The Scanner Activity will return the the 
+	 * result of the scan by calling this function.  
+	 */
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     	if(requestCode == IntentIntegrator.REQUEST_CODE && resultCode != RESULT_CANCELED) {
 	    	IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
 	    	if (scanResult != null) {
+	    		// Use scanResult.getContents() to store the result in a string
 		    	String result = scanResult.getContents();
 		    	
 		    	/*
-		    	 * Store and display the scanned message returned in result
+		    	 * Do something with the scanned message
 		    	 */
 	    	}
     	}

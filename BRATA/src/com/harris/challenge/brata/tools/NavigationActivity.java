@@ -251,6 +251,10 @@ public class NavigationActivity extends Activity implements OnClickListener, GPS
 		// debugging multiple recurring events and application crashes. 
 		// Set this variable to true to view the GPS toast message.
 		boolean GPS_show_updates = true;
+		
+		// The default GPS update time is 3 seconds.  You can set this to a 
+		// different time by changing GPSUpdateDelay in GPSService.java.  
+		// You should disable this toast message if that time is less than 2 secs.
 		if(GPS_show_updates)
 		{
 			Toast.makeText(getBaseContext(), 

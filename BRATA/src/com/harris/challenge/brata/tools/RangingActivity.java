@@ -24,9 +24,9 @@ public class RangingActivity extends Activity {
 	
 	// We will be basing our calculations on this constant for earth's 
 	// radius assuming a perfect sphere and ignoring any elliptical adjustments.
-	// We can also assume that the curvature of the earth is negligible for
-	// distances we need to measure and assume latitude and longitude distances
-	// appropriate for Melbourne FL.
+	// You may also assume that the curvature of the earth is negligible for
+	// distances we need to measure (If so use latitude and longitude distances
+	// appropriate for Melbourne FL.)
 	
 	
 	/*
@@ -64,6 +64,15 @@ public class RangingActivity extends Activity {
 	public double calculateDistance(double latitude_A, double longitude_A, double latitude_B, double longitude_B)
 	{
 		return 0.0;
+	}
+	
+	/*
+	 * This function could be used to update any layout elements 
+	 * each time the distance between coordinates has been calculated
+	 */
+	public void UpdateUI()
+	{
+		
 	}
 	
 	
