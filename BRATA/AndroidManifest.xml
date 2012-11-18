@@ -32,6 +32,7 @@
         <activity android:name=".tools.TimerActivity"></activity>
         <activity android:name=".tools.LightSensorActivity"></activity>
         <activity android:name=".tools.SubmitResponseActivity"></activity>
+        <activity android:name=".tools.InclinationActivity"></activity>
         
         <service android:name=".framework.GPSService" />
         <receiver android:name=".framework.SMSReceiver" android:exported="true" > 
