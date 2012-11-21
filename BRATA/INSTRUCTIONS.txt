@@ -1,0 +1,41 @@
+Instructions
+
+After you have saved the brata project files to a workspace location you may start eclipse and select that workspace location when prompted to by eclipse which should automatically populate p
+
+ - Save the Brata project folder to a workspace location on your computer.
+ 
+ - Start Eclipse and when prompted to select the same workspace location for eclipse to use.
+ 
+ - If eclipse is already running, add the Brata project by:
+ 
+	 - Selecting File > Import...
+	 
+	 - Select General > Existing Projects into Workspace and click Next
+	 
+	 - Click Browse and select the workspace location chosen above containing your Brata 
+	 project folder and click Finish.
+
+ - The Brata project should automatically poputate to your Package Explorer Pane in eclipse.  If the
+ Package Expolorer Pane is not visible then select Window > Show View > Package Explorer.
+
+ - Right click the Brata project and select Open Project if it is not already open. 
+To run the Brata project make sure your Brata project is highlighted/selected and then press the Run button which is just a green circle with a play icon in its center (Mousing over it will display 'Run ...').  Follow the prompts to choose an existing Android virtual device or Android phone connected by USB to run on.
+
+
+Possible issues:
+
+If your Brata project has errors in it then try cleaning it by selecting Project > Clean... 
+
+In general if youare having problems with gen/com.<package name>/R.java not being regenerated 
+correctly, even after cleaning your project (R.java is needed for referencing widgets from layouts in 
+code) then this probably means that you have a error in an XML Layout file that is preventing your 
+project from compiling correctly.  Try commenting our areas of your xml files to locate the source of 
+the problem.
+
+When opening up an Activity layout in the <project>/res/layout, if it opens with the normal xml 
+editor rather than the Android graphical editor then close the xml file.  Right click it in the Package 
+Explorer and select Open with > Android Layout Editor.
+	
+For errors not mentioned here that you may run into remember that Google is your friend.  Use the 
+errors you see as queries to Google.
+	
