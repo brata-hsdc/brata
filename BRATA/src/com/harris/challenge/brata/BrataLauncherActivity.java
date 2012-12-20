@@ -14,6 +14,7 @@ import android.widget.GridView;
 import android.widget.AdapterView.OnItemClickListener;
 import com.harris.challenge.brata.R;
 import com.harris.challenge.brata.framework.GPSService;
+import com.harris.challenge.brata.tools.BearingActivity;
 import com.harris.challenge.brata.tools.LightSensorActivity;
 import com.harris.challenge.brata.tools.NavigationActivity;
 import com.harris.challenge.brata.tools.QRCodeReaderActivity;
@@ -39,8 +40,8 @@ public class BrataLauncherActivity extends Activity implements OnItemClickListen
         items.add(new ActivityItem("Send Response",   R.drawable.ic_launcher, new Intent(this, SubmitResponseActivity.class)));
         items.add(new ActivityItem("Navigate",        R.drawable.ic_launcher, new Intent(this, NavigationActivity.class)));
         items.add(new ActivityItem("Ranging",         R.drawable.ic_launcher, new Intent(this, RangingActivity.class)));
+        items.add(new ActivityItem("Bearing Sensor",  R.drawable.ic_launcher, new Intent(this, BearingActivity.class)));
         items.add(new ActivityItem("QR Code Reader",  R.drawable.ic_launcher, new Intent(this, QRCodeReaderActivity.class)));
-        items.add(new ActivityItem("Sensor Example",  R.drawable.ic_launcher, new Intent(this, SensorExamplesActivity.class)));
         items.add(new ActivityItem("Timer Tool",      R.drawable.ic_launcher, new Intent(this, TimerActivity.class)));
         items.add(new ActivityItem("Light Sensor",    R.drawable.ic_launcher, new Intent(this, LightSensorActivity.class)));
         items.add(new ActivityItem("Inclination Sensor",    R.drawable.ic_launcher, new Intent(this, InclinationActivity.class)));
