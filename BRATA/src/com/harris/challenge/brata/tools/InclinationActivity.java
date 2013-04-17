@@ -75,7 +75,7 @@ public class InclinationActivity extends Activity
                       
                       // MATH examples
                       
-                      // fine the absolute value of a negative number
+                      // find the absolute value of a negative number
                       //     int negNumber = -1;
                       //     int posNumber = Math.abs(negNumber);
                       

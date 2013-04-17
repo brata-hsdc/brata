@@ -20,7 +20,7 @@ import android.widget.TextView;
  */
 public class RangingActivity extends Activity {
 	// Distance in meters of earth's equitorial radius
-	final float EARTH_EQUITORIAL_RADIUS_METERS = 63781370.0f;
+	final float EARTH_EQUITORIAL_RADIUS_METERS = 6378137.0f;
 	
 	// We will be basing our calculations on this constant for earth's 
 	// radius assuming a perfect sphere and ignoring any elliptical adjustments.

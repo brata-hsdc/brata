@@ -24,7 +24,7 @@ public class GPSService extends Service {
     private MyLocationListener locationListener;
     private Set<GPSServiceListener> listeners;
     private long GPSUpdateDelay = 3000;
-    private long minDistanceMeters = 15;
+    private long minDistanceMeters = 0;
     private int lastStatus = 0;
     private static boolean showingDebugToast = false;
     private final IBinder mBinder = (IBinder) new LocalBinder();
