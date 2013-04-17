@@ -24,7 +24,16 @@ To run the Brata project make sure your Brata project is highlighted/selected an
 
 Possible issues:
 
-If your Brata project has errors in it then try cleaning it by selecting Project > Clean... 
+If your Brata project has errors in it then try cleaning it by selecting Project > Clean...
+
+If errors persist then try navigating to window > preferences.  In Java > Build Path > User Libraries
+ensure that a system library exists.  If not click New, give it a name, check the System Library 
+checkbox nad click Ok.  Now right click on your project and click Android Tools > Fix Project Properties.  
+Then try cleaning and rebuilding, Project > Clean.
+
+Other errors may occur if you do not use the right version of java.  This project assumes java 1.6.  
+To change or verify this right click on the project and go to Properties.  Under Java Compiler select 
+Java Compiler Compliance level 1.6 and accept when prompted to recompile. 
 
 In general if youare having problems with gen/com.<package name>/R.java not being regenerated 
 correctly, even after cleaning your project (R.java is needed for referencing widgets from layouts in 

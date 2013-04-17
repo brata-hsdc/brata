@@ -178,6 +178,7 @@ public class LightSensorActivity extends Activity implements SensorEventListener
      * call this function on all registered listeners with parameters that contain 
      * the new light value.
      */
+	
 	@Override
 	public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_LIGHT) {
