@@ -1,18 +1,20 @@
 package com.harris.challenge.brata.tools;
 
+import java.io.File;
 import java.io.IOException;
 
 import android.app.Activity;
-import android.content.Context;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.harris.challenge.brata.R;
 
 /**
  * This class handles the recording of audio files.
@@ -28,17 +30,25 @@ import android.widget.LinearLayout;
 public class SoundRecordingActivity extends Activity {
 	private static final String LOG_TAG = "SoundRecordingActivity";
 	
-	private static String mFileName = null;
+	private static String mFolder = null;
 	
-	private RecordButton mRecordButton = null;
+	private TextView mFileName = null;
+	
+	boolean mStartRecording = true;
+	boolean mStartPlaying = true;
+	
+	private Button mRecordButton = null;
     private MediaRecorder mRecorder = null;
 
-    private PlayButton   mPlayButton = null;
+    private Button   mPlayButton = null;
     private MediaPlayer   mPlayer = null;
     
     public SoundRecordingActivity() {
-    	mFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
-    	mFileName += "/bratarecording.3gp";
+    	mFolder = Environment.getExternalStorageDirectory().getAbsolutePath();
+    	mFolder += "/brata/";
+    	
+    	File brataDir = new File(mFolder);
+    	brataDir.mkdirs();
     }
     
     private void onRecord(boolean start) {
@@ -60,7 +70,7 @@ public class SoundRecordingActivity extends Activity {
     private void startPlaying() {
         mPlayer = new MediaPlayer();
         try {
-            mPlayer.setDataSource(mFileName);
+            mPlayer.setDataSource(mFolder + mFileName.getText().toString());
             mPlayer.prepare();
             mPlayer.start();
         } catch (IOException e) {
@@ -77,16 +87,15 @@ public class SoundRecordingActivity extends Activity {
         mRecorder = new MediaRecorder();
         mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-        mRecorder.setOutputFile(mFileName);
+        mRecorder.setOutputFile(mFolder + mFileName.getText().toString());
         mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
 
         try {
             mRecorder.prepare();
+            mRecorder.start();
         } catch (IOException e) {
             Log.e(LOG_TAG, "prepare() failed");
         }
-
-        mRecorder.start();
     }
 
     private void stopRecording() {
@@ -98,21 +107,16 @@ public class SoundRecordingActivity extends Activity {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        
+        setContentView(R.layout.activity_sound);
 
-        LinearLayout ll = new LinearLayout(this);
-        mRecordButton = new RecordButton(this);
-        ll.addView(mRecordButton,
-            new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                0));
-        mPlayButton = new PlayButton(this);
-        ll.addView(mPlayButton,
-            new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                0));
-        setContentView(ll);
+        mFileName = (TextView)findViewById(R.id.TextFileName);
+        mRecordButton = (Button)findViewById(R.id.RecordButton);
+        mPlayButton = (Button)findViewById(R.id.PlayButton);
+        
+        mRecordButton.setOnClickListener(record);
+        mPlayButton.setOnClickListener(play);
+        
     }
 
     @Override
@@ -129,47 +133,27 @@ public class SoundRecordingActivity extends Activity {
         }
     }
     
-    class RecordButton extends Button {
-        boolean mStartRecording = true;
-
-        OnClickListener clicker = new OnClickListener() {
-            public void onClick(View v) {
-                onRecord(mStartRecording);
-                if (mStartRecording) {
-                    setText("Stop recording");
-                } else {
-                    setText("Start recording");
-                }
-                mStartRecording = !mStartRecording;
+	OnClickListener record = new OnClickListener() {
+		public void onClick(View v) {
+			onRecord(mStartRecording);
+            if (mStartRecording) {
+                mRecordButton.setText("Stop recording");
+            } else {
+            	mRecordButton.setText("Start recording");
             }
-        };
-
-        public RecordButton(Context ctx) {
-            super(ctx);
-            setText("Start recording");
-            setOnClickListener(clicker);
-        }
-    }
-
-    class PlayButton extends Button {
-        boolean mStartPlaying = true;
-
-        OnClickListener clicker = new OnClickListener() {
-            public void onClick(View v) {
-                onPlay(mStartPlaying);
-                if (mStartPlaying) {
-                    setText("Stop playing");
-                } else {
-                    setText("Start playing");
-                }
-                mStartPlaying = !mStartPlaying;
+            mStartRecording = !mStartRecording;
+		}
+	};
+	
+	OnClickListener play = new OnClickListener() {
+		public void onClick(View v) {
+            onPlay(mStartPlaying);
+            if (mStartPlaying) {
+                mPlayButton.setText("Stop playing");
+            } else {
+            	mPlayButton.setText("Start playing");
             }
-        };
-
-        public PlayButton(Context ctx) {
-            super(ctx);
-            setText("Start playing");
-            setOnClickListener(clicker);
-        }
-    }
+            mStartPlaying = !mStartPlaying;
+		}
+	};
 }
