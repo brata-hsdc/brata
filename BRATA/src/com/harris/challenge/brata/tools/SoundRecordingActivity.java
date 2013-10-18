@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import android.app.Activity;
 import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
@@ -28,21 +29,54 @@ import com.harris.challenge.brata.R;
  *
  */
 public class SoundRecordingActivity extends Activity {
+	/**
+	 * Tag to track errors in LogCat
+	 */
 	private static final String LOG_TAG = "SoundRecordingActivity";
 	
+	/**
+	 * Directory where recordings are kept
+	 */
 	private static String mFolder = null;
 	
+	/**
+	 * Handle to the filename text view
+	 */
 	private TextView mFileName = null;
 	
-	boolean mStartRecording = true;
-	boolean mStartPlaying = true;
+	/**
+	 * Recording state (true means ready to record, false means recording)
+	 */
+	private boolean mStartRecording = true;
 	
+	/**
+	 * Playback state (true means ready to play, false means playing)
+	 */
+	private boolean mStartPlaying = true;
+	
+	/**
+	 * Handle to the record button
+	 */
 	private Button mRecordButton = null;
+	
+	/**
+	 * Handle to the MediaRecorder
+	 */
     private MediaRecorder mRecorder = null;
 
-    private Button   mPlayButton = null;
-    private MediaPlayer   mPlayer = null;
+    /**
+     * Handle to the play button
+     */
+    private Button mPlayButton = null;
     
+    /**
+     * Handle to the MediaPlayer
+     */
+    private MediaPlayer mPlayer = null;
+    
+    /**
+     * Constructor. Sets the directory for recordings storage
+     */
     public SoundRecordingActivity() {
     	mFolder = Environment.getExternalStorageDirectory().getAbsolutePath();
     	mFolder += "/brata/";
@@ -51,6 +85,10 @@ public class SoundRecordingActivity extends Activity {
     	brataDir.mkdirs();
     }
     
+    /**
+     * Handle the record start/stop
+     * @param start True to start recording, false to stop.
+     */
     private void onRecord(boolean start) {
         if (start) {
             startRecording();
@@ -59,6 +97,10 @@ public class SoundRecordingActivity extends Activity {
         }
     }
 
+    /**
+     * Handle the playback start/stop
+     * @param start True to start playback, false to stop.
+     */
     private void onPlay(boolean start) {
         if (start) {
             startPlaying();
@@ -67,8 +109,12 @@ public class SoundRecordingActivity extends Activity {
         }
     }
 
+    /**
+     * Play the audio
+     */
     private void startPlaying() {
         mPlayer = new MediaPlayer();
+        mPlayer.setOnCompletionListener(playCompleted);
         try {
             mPlayer.setDataSource(mFolder + mFileName.getText().toString());
             mPlayer.prepare();
@@ -78,11 +124,17 @@ public class SoundRecordingActivity extends Activity {
         }
     }
 
+    /**
+     * Stop playing the audio
+     */
     private void stopPlaying() {
         mPlayer.release();
         mPlayer = null;
     }
 
+    /**
+     * Start recording
+     */
     private void startRecording() {
         mRecorder = new MediaRecorder();
         mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
@@ -98,6 +150,9 @@ public class SoundRecordingActivity extends Activity {
         }
     }
 
+    /**
+     * Stop recording
+     */
     private void stopRecording() {
         mRecorder.stop();
         mRecorder.release();
@@ -108,12 +163,16 @@ public class SoundRecordingActivity extends Activity {
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         
+        // Set the content view (can call findViewById after this)
         setContentView(R.layout.activity_sound);
 
+        // Need filename textview to get the filename text
         mFileName = (TextView)findViewById(R.id.TextFileName);
+        // Need the record/play buttons to add the listeners and set the text
         mRecordButton = (Button)findViewById(R.id.RecordButton);
         mPlayButton = (Button)findViewById(R.id.PlayButton);
         
+        // Set the listeners for clicks
         mRecordButton.setOnClickListener(record);
         mPlayButton.setOnClickListener(play);
         
@@ -122,6 +181,7 @@ public class SoundRecordingActivity extends Activity {
     @Override
     public void onPause() {
         super.onPause();
+        // Free up the resources
         if (mRecorder != null) {
             mRecorder.release();
             mRecorder = null;
@@ -133,6 +193,9 @@ public class SoundRecordingActivity extends Activity {
         }
     }
     
+    /**
+     * Listener for when the user clicks the record button
+     */
 	OnClickListener record = new OnClickListener() {
 		public void onClick(View v) {
 			onRecord(mStartRecording);
@@ -145,6 +208,9 @@ public class SoundRecordingActivity extends Activity {
 		}
 	};
 	
+    /**
+     * Listener for when the user clicks the play button
+     */
 	OnClickListener play = new OnClickListener() {
 		public void onClick(View v) {
             onPlay(mStartPlaying);
@@ -155,5 +221,18 @@ public class SoundRecordingActivity extends Activity {
             }
             mStartPlaying = !mStartPlaying;
 		}
+	};
+	
+	/**
+	 * Listener for when playback completed to set button in correct state
+	 */
+	OnCompletionListener playCompleted = new OnCompletionListener() {
+
+		@Override
+		public void onCompletion(MediaPlayer arg0) {
+			mStartPlaying = true;
+			mPlayButton.setText("Start playing");
+		}
+		
 	};
 }
