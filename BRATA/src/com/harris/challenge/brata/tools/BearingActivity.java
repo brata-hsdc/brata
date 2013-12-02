@@ -7,19 +7,16 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.widget.TextView;
 
-//  I have included this so students can use it to help their code compute some
-//  complex math functions.  See Math Examples below.
-import 	java.lang.Math;
-
-
+/**
+ * Used for finding rotational bearing
+ * 
+ * @author Harris Corporation
+ *
+ */
 public class BearingActivity extends Activity implements SensorEventListener
 {   
-
   Float reading_in_radians;  // View to draw a compass
-  final float rad2deg = (float)(180.0f/Math.PI);
-  TextView Angle_Value = null;
   SensorManager sensorManager = null;
   /** Called when the activity is first created. */
   @Override
@@ -30,9 +27,7 @@ public class BearingActivity extends Activity implements SensorEventListener
 
       // there are a few sensors on the phone.  This guy manages them all.
       SensorManager sensorManager = (SensorManager) this.getSystemService(SENSOR_SERVICE);        
-      
-      Angle_Value = (TextView) findViewById(R.id.textView21);
-      
+
       // You have set the event listener up, now just need to register this with the
       // sensor manager along with the sensor wanted.
       sensorManager.registerListener(this, 

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textView1"
+    	android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+ 		android:gravity="center"
+        android:layout_margin="8dip"
+        android:text="@string/main_title"
+        android:textAppearance="@android:style/TextAppearance.Large"
+        android:textStyle="bold" />
+
+    <LinearLayout
+    	android:layout_width="fill_parent"
+    	 android:layout_height="fill_parent"
+    	 android:orientation="horizontal"
+    	 android:baselineAligned="false">
+        
+        <TextView  
+          android:id="@+id/launchIndicents"
+		  android:layout_marginTop="100dp"
+		  android:layout_width="0dp"
+		  android:layout_weight="1"
+		  android:layout_height="wrap_content" 
+		  android:text="@string/incident_title"
+	      android:textAppearance="@android:style/TextAppearance.Large"
+		  android:drawableTop="@drawable/ic_launcher" android:padding="5dp"/>
+        
+        
+        <TextView  
+          android:id="@+id/launchTools"
+		  android:layout_marginTop="100dp"
+		  android:layout_width="0dp"
+		  android:layout_weight="1"
+		  android:layout_height="wrap_content" 
+		  android:text="@string/tools_title"
+	      android:textAppearance="@android:style/TextAppearance.Large"
+		  android:drawableTop="@drawable/ic_launcher" android:paddingTop="5dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

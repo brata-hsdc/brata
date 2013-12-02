@@ -16,20 +16,20 @@
 
 package com.harris.challenge.brata.tools;
 
-// Need the following import to get access to the app resources, since this
-// class is in a sub-package.
-
 import com.harris.challenge.brata.R;
 import com.harris.challenge.brata.framework.IntentIntegrator;
 import com.harris.challenge.brata.framework.IntentResult;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
 
+/**
+ * Used to scan and decode QR codes
+ * 
+ * @author Harris Corporation
+ *
+ */
 public class QRCodeReaderActivity extends Activity {    
-    private TextView textScannedMessage = null;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,18 +39,10 @@ public class QRCodeReaderActivity extends Activity {
         //   res->layout->activity_request_clue.xml
         // to our Activity. We can now find views within that layout and
         // manipulate them. Don't try to call findViewById() before this!
-        setContentView(R.layout.qr_reader_activity);
-        
-        /*
-		 * This activity needs layout elements to start a QR scan and display the result
-		 * 
-		 * Initialize widgets from layout resources here using findViewById().
-		 * For functional widgets assign the widgets an action listener function 
-		 * defined by this activity.    
-		 */
+        setContentView(R.layout.activity_qr_reader);
     }
     
-    /*
+    /**
 	 * The framework provides the capability to launch a QR Code Scanner.
 	 * In order to invoke the QR Code Scanner call this function.
 	 */
@@ -60,7 +52,7 @@ public class QRCodeReaderActivity extends Activity {
     	IntentIntegrator.initiateScan(QRCodeReaderActivity.this);
     }
     
-    /*
+    /**
 	 * After the QR Code Scanner has read a code successfully it will finish
 	 * and return to this activity.  The Scanner Activity will return the the 
 	 * result of the scan by calling this function.  

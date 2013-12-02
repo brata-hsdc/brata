@@ -1,0 +1,37 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_margin="8dip"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:textAppearance="@android:style/TextAppearance.Large"
+        android:layout_margin="8dip"
+        android:text="@string/incident_title"
+        android:textStyle="bold" />
+    
+	<LinearLayout
+	  android:layout_height="fill_parent"
+	  android:layout_width="fill_parent"
+	  android:gravity="center"
+	  android:layout_gravity="center">
+	  
+	    <GridView 
+	      android:id="@+id/mainActivityGrid"
+	      android:layout_margin="8dip"
+	      android:horizontalSpacing="8dp"
+	      android:verticalSpacing="24dp"
+	      android:numColumns="auto_fit"
+	      android:layout_width="fill_parent"
+	      android:layout_height="wrap_content"
+	      android:stretchMode="columnWidth"
+	      android:gravity="center" />
+	    
+	</LinearLayout>
+
+</RelativeLayout>

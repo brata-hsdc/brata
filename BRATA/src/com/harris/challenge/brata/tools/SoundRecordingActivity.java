@@ -2,6 +2,8 @@ package com.harris.challenge.brata.tools;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
 import android.media.MediaPlayer;
@@ -13,7 +15,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.harris.challenge.brata.R;
 
@@ -38,11 +43,6 @@ public class SoundRecordingActivity extends Activity {
 	 * Directory where recordings are kept
 	 */
 	private static String mFolder = null;
-	
-	/**
-	 * Handle to the filename text view
-	 */
-	private TextView mFileName = null;
 	
 	/**
 	 * Recording state (true means ready to record, false means recording)
@@ -75,6 +75,16 @@ public class SoundRecordingActivity extends Activity {
     private MediaPlayer mPlayer = null;
     
     /**
+     * Handle to the radio group for file selection
+     */
+    private RadioGroup filesGroup;
+    
+    /**
+     * List of possible files to save from
+     */
+    private String[] filesList;
+    
+    /**
      * Constructor. Sets the directory for recordings storage
      */
     public SoundRecordingActivity() {
@@ -83,6 +93,43 @@ public class SoundRecordingActivity extends Activity {
     	
     	File brataDir = new File(mFolder);
     	brataDir.mkdirs();
+    	
+    	filesList = new String[]{
+    			"Recording1", 
+    			"Recording2",
+    			"Recording3",
+    			"Recording4",
+    			"Recording5",
+    	};
+    }
+    
+    /**
+     * Used to create handles to sound files
+     */
+    private void setUpSoundFiles()
+    {
+    	for (int i = 0; i<filesList.length; i++) {
+            
+            RadioButton radioButton = new RadioButton(this);
+            radioButton.setText(filesList[i]);  
+            filesGroup.addView(radioButton);
+                      
+            if(i == 0)
+            {
+            	filesGroup.check(radioButton.getId());
+            }
+		}
+    	
+    }
+    
+    /**
+     * Returns the path for the currently selected file
+     * @return
+     */
+    private String getCurrentFile()
+    {
+    	 return mFolder + 
+    			 ((RadioButton) findViewById(filesGroup.getCheckedRadioButtonId())).getText().toString();
     }
     
     /**
@@ -115,8 +162,9 @@ public class SoundRecordingActivity extends Activity {
     private void startPlaying() {
         mPlayer = new MediaPlayer();
         mPlayer.setOnCompletionListener(playCompleted);
+        Toast.makeText(this, getCurrentFile(), Toast.LENGTH_LONG).show();     
         try {
-            mPlayer.setDataSource(mFolder + mFileName.getText().toString());
+            mPlayer.setDataSource(getCurrentFile());
             mPlayer.prepare();
             mPlayer.start();
         } catch (IOException e) {
@@ -131,6 +179,7 @@ public class SoundRecordingActivity extends Activity {
         mPlayer.release();
         mPlayer = null;
     }
+    
 
     /**
      * Start recording
@@ -139,7 +188,7 @@ public class SoundRecordingActivity extends Activity {
         mRecorder = new MediaRecorder();
         mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-        mRecorder.setOutputFile(mFolder + mFileName.getText().toString());
+        mRecorder.setOutputFile(getCurrentFile());
         mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
 
         try {
@@ -167,7 +216,7 @@ public class SoundRecordingActivity extends Activity {
         setContentView(R.layout.activity_sound);
 
         // Need filename textview to get the filename text
-        mFileName = (TextView)findViewById(R.id.TextFileName);
+        //mFileName = (TextView)findViewById(R.id.TextFileName);
         // Need the record/play buttons to add the listeners and set the text
         mRecordButton = (Button)findViewById(R.id.RecordButton);
         mPlayButton = (Button)findViewById(R.id.PlayButton);
@@ -176,6 +225,9 @@ public class SoundRecordingActivity extends Activity {
         mRecordButton.setOnClickListener(record);
         mPlayButton.setOnClickListener(play);
         
+        // Set up files selection group
+        filesGroup = (RadioGroup) findViewById(R.id.FilesRadioGroup);
+        setUpSoundFiles();
     }
 
     @Override

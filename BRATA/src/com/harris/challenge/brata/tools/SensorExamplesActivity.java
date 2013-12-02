@@ -17,11 +17,6 @@ import android.widget.Button;
 public class SensorExamplesActivity extends Activity implements OnClickListener{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
-        setContentView(R.layout.activity_request_clue);
-        
-        Button submitButton = (Button) findViewById(R.id.submitButton);
-        submitButton.setOnClickListener(this);
     }
     
     @Override
@@ -33,12 +28,8 @@ public class SensorExamplesActivity extends Activity implements OnClickListener{
      * @see android.view.View.OnClickListener#onClick(android.view.View)
      */
     public void onClick(View view) {
-    	switch(view.getId()) {
     	
-    	case R.id.submitButton:
-    		//TODO: handle what happens when the submit button is pressed
-    		break;
-    	}
     }
+    	
 
 }

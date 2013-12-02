@@ -16,22 +16,11 @@
         android:layout_height="wrap_content"
         android:text="Start Playback" />
 
-    <TextView
-        android:id="@+id/textView1"
+    <RadioGroup
+        android:id="@+id/FilesRadioGroup"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Filename"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:layout_height="wrap_content" >
 
-    <EditText
-        android:id="@+id/TextFileName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textNoSuggestions"
-        android:text="BRATArecording.gpp" >
-
-        <requestFocus />
-    </EditText>
+    </RadioGroup>
 
 </LinearLayout>

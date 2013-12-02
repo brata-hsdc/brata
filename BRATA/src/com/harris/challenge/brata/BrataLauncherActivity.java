@@ -19,8 +19,7 @@ import com.harris.challenge.brata.tools.LightSensorActivity;
 import com.harris.challenge.brata.tools.NavigationActivity;
 import com.harris.challenge.brata.tools.QRCodeReaderActivity;
 import com.harris.challenge.brata.tools.RangingActivity;
-import com.harris.challenge.brata.tools.RequestClueActivity;
-import com.harris.challenge.brata.tools.SensorExamplesActivity;
+import com.harris.challenge.brata.tools.RequestAssignmentActivity;
 import com.harris.challenge.brata.tools.SoundRecordingActivity;
 import com.harris.challenge.brata.tools.TimerActivity;
 import com.harris.challenge.brata.tools.SubmitResponseActivity;
@@ -37,16 +36,16 @@ public class BrataLauncherActivity extends Activity implements OnItemClickListen
         GridView activityGrid = (GridView) findViewById(R.id.mainActivityGrid);
                 
         List<ActivityItem> items = new ArrayList<ActivityItem>();
-        items.add(new ActivityItem("Request Clue",    R.drawable.ic_launcher, new Intent(this, RequestClueActivity.class)));
+        items.add(new ActivityItem("Request Assingment",    R.drawable.ic_launcher, new Intent(this, RequestAssignmentActivity.class)));
         items.add(new ActivityItem("Send Response",   R.drawable.ic_launcher, new Intent(this, SubmitResponseActivity.class)));
         items.add(new ActivityItem("Navigate",        R.drawable.ic_launcher, new Intent(this, NavigationActivity.class)));
         items.add(new ActivityItem("Ranging",         R.drawable.ic_launcher, new Intent(this, RangingActivity.class)));
         items.add(new ActivityItem("Bearing Sensor",  R.drawable.ic_launcher, new Intent(this, BearingActivity.class)));
         items.add(new ActivityItem("QR Code Reader",  R.drawable.ic_launcher, new Intent(this, QRCodeReaderActivity.class)));
-        items.add(new ActivityItem("Timer Tool",      R.drawable.ic_launcher, new Intent(this, TimerActivity.class)));
-        items.add(new ActivityItem("Light Sensor",    R.drawable.ic_launcher, new Intent(this, LightSensorActivity.class)));
         items.add(new ActivityItem("Inclination Sensor",    R.drawable.ic_launcher, new Intent(this, InclinationActivity.class)));
         items.add(new ActivityItem("Sound Recording", R.drawable.ic_launcher, new Intent(this, SoundRecordingActivity.class)));
+//    	items.add(new ActivityItem("Timer Tool",      R.drawable.ic_launcher, new Intent(this, TimerActivity.class)));
+//      items.add(new ActivityItem("Light Sensor",    R.drawable.ic_launcher, new Intent(this, LightSensorActivity.class)));
         
         ActivityAdapter activities = new ActivityAdapter(getApplicationContext(), items);
 

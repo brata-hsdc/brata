@@ -7,13 +7,13 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.widget.TextView;
 
-//  I have included this so students can use it to help their code compute some
-//  complex math functions.  See Math Examples below.
-import 	java.lang.Math;
-
-
+/**
+ * Used for finding inclination of an object
+ * 
+ * @author Harris Corporation
+ *
+ */
 public class InclinationActivity extends Activity
 {   
   /** Called when the activity is first created. */
@@ -25,9 +25,6 @@ public class InclinationActivity extends Activity
 
       // there are a few sensors on the phone.  This guy manages them all.
       SensorManager sensorManager = (SensorManager) this.getSystemService(SENSOR_SERVICE);        
-      
-      TextView Angle_Value = (TextView) findViewById(R.id.textView21);
-      TextView XYZ_Values = (TextView) findViewById(R.id.textView20);
       
       // We make a SensorEventListener which actually listens to our sensor...
       final SensorEventListener mEventListener = new SensorEventListener() 
@@ -46,45 +43,13 @@ public class InclinationActivity extends Activity
               	  // the Accelerometer will return to you the orientation of the phone
                   // by giving you a X,Y,Z value.
                   case Sensor.TYPE_ACCELEROMETER:
-                  	// 3 array values are returned in an array 
-                  	// event.values [0] = x 
-                  	// event.values [1] = y
-                  	// event.values [2] = z
-                      
+
+                	  //Raw sensor values from accelerometer
                       float x = event.values[0];
                       float y = event.values[1];
-                      float z = event.values[2];
-                      
-                      // The values x, y, z are 3D coordinate values                      
-                      // You can add code here to display these values to the screen.
-                      // Once you can see the values on the screen try rotating your phone
-                      // around to try and understand the orientation values that your 
-                      // phone is reporting.
-                      // Hint:  You can probably ignore the Z value.  2D coordinates (x,y)
-                      // can be used to find angels just fine.
-                      
-                      //    XYZ_Values.setText(...
-                      
-                      
-                      // Once you have a better idea of what your X and Y values stand for, you
-                      // should be able to use some simple trig to find the angle in which your
-                      // phone is currently tilted.  
-                      
-                      //    Angle_Value.setText(...
-                      
-                      
-                      // MATH examples
-                      
-                      // find the absolute value of a negative number
-                      //     int negNumber = -1;
-                      //     int posNumber = Math.abs(negNumber);
-                      
-                      // posNumber value should be 1
-                      
-                      // other math functions can be found online... just do some googling.
+                      float z = event.values[2];                    
                       
                       break;
-
               }
           };
       };
