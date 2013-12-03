@@ -16,12 +16,17 @@
 
 package com.harris.challenge.brata.tools;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+
 import com.harris.challenge.brata.R;
 import com.harris.challenge.brata.framework.IntentIntegrator;
 import com.harris.challenge.brata.framework.IntentResult;
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
 
 /**
  * Used to scan and decode QR codes
@@ -29,7 +34,10 @@ import android.os.Bundle;
  * @author Harris Corporation
  *
  */
-public class QRCodeReaderActivity extends Activity {    
+public class QRCodeReaderActivity extends Activity{  
+	Button scanCodeButton;
+	
+    private String httpBase = "http://";
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,7 +48,15 @@ public class QRCodeReaderActivity extends Activity {
         // to our Activity. We can now find views within that layout and
         // manipulate them. Don't try to call findViewById() before this!
         setContentView(R.layout.activity_qr_reader);
-    }
+        scanCodeButton = (Button)findViewById(R.id.scanCodeButton);
+        scanCodeButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				scanCode();		
+			}
+		});
+        }
     
     /**
 	 * The framework provides the capability to launch a QR Code Scanner.
@@ -65,9 +81,26 @@ public class QRCodeReaderActivity extends Activity {
 		    	String result = scanResult.getContents();
 		    	
 		    	/*
-		    	 * Do something with the scanned message
+		    	 * Launch webview if result is URL
 		    	 */
+		    	if(result.contains("www."))
+		    	{
+		    		launchWebView(result);
+		    	}
 	    	}
     	}
     }
+    
+    /*
+     * This method actually does the work of kicking off the browser.
+     * 
+     * NOTE: The URL MUST have an http:// prefix so that the OS knows to load the browser and not a different system activity.
+     * */
+    private void launchWebView(String url)
+    {
+        Uri uri = Uri.parse(url);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
+    }
+
 }
