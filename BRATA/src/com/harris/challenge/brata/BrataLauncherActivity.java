@@ -12,9 +12,11 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.AdapterView.OnItemClickListener;
+
 import com.harris.challenge.brata.R;
 import com.harris.challenge.brata.framework.GPSService;
 import com.harris.challenge.brata.tools.BearingActivity;
+import com.harris.challenge.brata.tools.DistanceFinderActivity;
 import com.harris.challenge.brata.tools.LightSensorActivity;
 import com.harris.challenge.brata.tools.NavigationActivity;
 import com.harris.challenge.brata.tools.QRCodeReaderActivity;
@@ -44,6 +46,7 @@ public class BrataLauncherActivity extends Activity implements OnItemClickListen
         items.add(new ActivityItem("QR Code Reader",  R.drawable.ic_launcher, new Intent(this, QRCodeReaderActivity.class)));
         items.add(new ActivityItem("Inclination Sensor",    R.drawable.ic_launcher, new Intent(this, InclinationActivity.class)));
         items.add(new ActivityItem("Sound Recording", R.drawable.ic_launcher, new Intent(this, SoundRecordingActivity.class)));
+        items.add(new ActivityItem("Distance Finder",    R.drawable.ic_launcher, new Intent(this, DistanceFinderActivity.class)));
 //    	items.add(new ActivityItem("Timer Tool",      R.drawable.ic_launcher, new Intent(this, TimerActivity.class)));
 //      items.add(new ActivityItem("Light Sensor",    R.drawable.ic_launcher, new Intent(this, LightSensorActivity.class)));
         
