@@ -67,13 +67,13 @@ public class BearingActivity extends Activity implements SensorEventListener
     // to derive the rotation in radians relative to the north pole 
     if (mGravity != null && mGeomagnetic != null)
     {
-      float R[] = new float[9];
-      float I[] = new float[9];
-      boolean success = SensorManager.getRotationMatrix(R, I, mGravity, mGeomagnetic);
+      float rotation[] = new float[9];
+      float inclincation[] = new float[9];
+      boolean success = SensorManager.getRotationMatrix(rotation, inclincation, mGravity, mGeomagnetic);
       if (success)
       {
         float orientation[] = new float[3];
-        SensorManager.getOrientation(R, orientation);
+        SensorManager.getOrientation(rotation, orientation);
         reading_in_radians = orientation[0]; 
         
         // Insert code here
