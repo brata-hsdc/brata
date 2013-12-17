@@ -68,8 +68,8 @@ public class BearingActivity extends Activity implements SensorEventListener
     if (mGravity != null && mGeomagnetic != null)
     {
       float rotation[] = new float[9];
-      float inclincation[] = new float[9];
-      boolean success = SensorManager.getRotationMatrix(rotation, inclincation, mGravity, mGeomagnetic);
+      float inclination[] = new float[9];
+      boolean success = SensorManager.getRotationMatrix(rotation, inclination, mGravity, mGeomagnetic);
       if (success)
       {
         float orientation[] = new float[3];
