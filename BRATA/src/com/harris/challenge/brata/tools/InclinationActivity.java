@@ -64,6 +64,6 @@ public class InclinationActivity extends Activity
   public void setListners(SensorManager sensorManager, SensorEventListener mEventListener)
   {
       sensorManager.registerListener(mEventListener, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), 
-              SensorManager.SENSOR_DELAY_NORMAL);
+              100000);
   }
 }
