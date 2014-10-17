@@ -17,6 +17,7 @@
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
         android:icon="@drawable/ic_launcher"
@@ -50,6 +51,8 @@
         <activity android:name="com.harris.challenge.brata.tools.SubmitResponseActivity" >
         </activity>
         <activity android:name="com.harris.challenge.brata.tools.InclinationActivity" >
+        </activity>
+        <activity android:name="com.harris.challenge.brata.tools.CountdownActivity" android:theme="@style/InclinationTheme">
         </activity>
         <activity android:name="com.harris.challenge.brata.tools.DistanceFinderActivity" 
         	android:screenOrientation="landscape">

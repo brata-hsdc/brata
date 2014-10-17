@@ -1,5 +1,10 @@
 <resources>
 
     <style name="AppTheme" parent="android:Theme.Light" />
+    
+    <!-- Application theme. -->
+    <style name="InclinationTheme" parent="@android:style/Theme.Black.NoTitleBar">
+        <item name="android:textSize" >5pt</item>
+    </style>
 
 </resources>
