@@ -1,3 +1,19 @@
+/*------------------------------------------------------------------------------
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *------------------------------------------------------------------------------
+ */
+
 package com.harris.challenge.brata.framework;
 
 import java.util.HashSet;
@@ -17,8 +33,8 @@ import android.os.IBinder;
 import android.widget.Toast;
 
 public class GPSService extends Service {
-	
-	// Local variables
+
+    // Local variables
     private LocationManager lm;
     private Location location;
     private MyLocationListener locationListener;
@@ -46,7 +62,7 @@ public class GPSService extends Service {
         // Will receive updates every 15 seconds
         lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 
-        				GPSUpdateDelay, 
+                        GPSUpdateDelay, 
                         minDistanceMeters,
                         locationListener);
         
@@ -61,7 +77,7 @@ public class GPSService extends Service {
         super.onDestroy();
         if(lm != null)
         {
-        	lm.removeUpdates(locationListener);
+            lm.removeUpdates(locationListener);
         }
     }
 
@@ -78,8 +94,8 @@ public class GPSService extends Service {
      */
     public void addGPSListener(GPSServiceListener listener)
     {
-    	listeners.add(listener);
-    	listener.onLocationChanged(location);
+        listeners.add(listener);
+        listener.onLocationChanged(location);
     }
     
     /**
@@ -87,7 +103,7 @@ public class GPSService extends Service {
      */
     public void removeGPSListener(GPSServiceListener listener)
     {
-    	listeners.remove(listener);
+        listeners.remove(listener);
     }
     
     /**
@@ -96,21 +112,21 @@ public class GPSService extends Service {
     public class MyLocationListener implements LocationListener {
             
         public void onLocationChanged(Location loc) {
-        	if (showingDebugToast) Toast.makeText(getBaseContext(), "onLocationChanged",
-        			Toast.LENGTH_SHORT).show();
+            if (showingDebugToast) Toast.makeText(getBaseContext(), "onLocationChanged",
+                    Toast.LENGTH_SHORT).show();
             if (loc != null)
             {
-            	location.set(loc);
-            	for(GPSServiceListener listener : listeners)
-            	{
-            		listener.onLocationChanged(location);
-            	}
+                location.set(loc);
+                for(GPSServiceListener listener : listeners)
+                {
+                    listener.onLocationChanged(location);
+                }
             }
         }
 
         public void onProviderDisabled(String provider) {
             Toast.makeText(getBaseContext(), "GPS is not enabled on this device.  "
-            		+"Must enable GPS Provider for GPS updates.",
+                    +"Must enable GPS Provider for GPS updates.",
                     Toast.LENGTH_LONG).show();
         }
 
@@ -153,7 +169,6 @@ public class GPSService extends Service {
      */
     public interface GPSServiceListener extends ServiceConnection
     {
-    	public void onLocationChanged(Location loc);
+        public void onLocationChanged(Location loc);
     }
-
 }

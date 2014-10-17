@@ -1,3 +1,19 @@
+/*------------------------------------------------------------------------------
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *------------------------------------------------------------------------------
+ */
+
 package com.harris.challenge.brata.tools;
 
 import com.harris.challenge.brata.R;
@@ -19,7 +35,7 @@ import android.view.View.OnClickListener;
  * @author Harris Corporation
  */
 public class SubmitResponseActivity extends Activity implements OnClickListener{
-	
+
     /* (non-Javadoc)
      * @see android.app.Activity#onCreate(android.os.Bundle)
      * 
@@ -40,13 +56,12 @@ public class SubmitResponseActivity extends Activity implements OnClickListener{
      * @see android.view.View.OnClickListener#onClick(android.view.View)
      */
     public void onClick(View view) {
-    	// In this example, we only have one button. However, if you had 
-    	// several buttons, all of them set to use this Activity as their click
-    	// listener, you can figure out which button was clicked by doing a
-    	// switch() on the button's view id.
-    	switch(view.getId()) {
-    	
-    	}
-    }   
+        // In this example, we only have one button. However, if you had 
+        // several buttons, all of them set to use this Activity as their click
+        // listener, you can figure out which button was clicked by doing a
+        // switch() on the button's view id.
+        switch(view.getId()) {
 
+        }
+    }   
 }

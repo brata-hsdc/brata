@@ -1,3 +1,19 @@
+/*------------------------------------------------------------------------------
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *------------------------------------------------------------------------------
+ */
+
 package com.harris.challenge.brata;
 
 import java.util.ArrayList;
@@ -19,11 +35,11 @@ import com.harris.challenge.incidents.StraightAsAnArrow;
 import com.harris.challenge.incidents.TwoPlacesAtOnce;
 
 public class IncidentLauncherActivity extends Activity implements OnItemClickListener {
-	
 
-	@Override
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
-    	  super.onCreate(savedInstanceState);
+          super.onCreate(savedInstanceState);
           requestWindowFeature(Window.FEATURE_NO_TITLE);
           setContentView(R.layout.activity_incident);
           
@@ -43,7 +59,7 @@ public class IncidentLauncherActivity extends Activity implements OnItemClickLis
     
     @Override
     protected void onDestroy() {
-    	super.onDestroy();
+        super.onDestroy();
     }
 
     @Override
@@ -52,10 +68,9 @@ public class IncidentLauncherActivity extends Activity implements OnItemClickLis
         return true;
     }
   
-	public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
-		ActivityItem item = (ActivityItem) adapter.getItemAtPosition(position);
+    public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
+        ActivityItem item = (ActivityItem) adapter.getItemAtPosition(position);
 
-		startActivity(item.mActivity);
-	}
-
+        startActivity(item.mActivity);
+    }
 }
