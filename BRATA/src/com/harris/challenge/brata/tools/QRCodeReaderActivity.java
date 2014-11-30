@@ -56,7 +56,7 @@ public class QRCodeReaderActivity extends Activity{
 				scanCode();		
 			}
 		});
-        }
+    }
     
     /**
 	 * The framework provides the capability to launch a QR Code Scanner.

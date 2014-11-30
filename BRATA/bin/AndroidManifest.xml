@@ -67,6 +67,15 @@
         </activity>
         <activity android:name="com.harris.challenge.incidents.DudeMyCar" >
         </activity>
+        
+        <activity android:name="com.harris.challenge.brata.SATChallengeLauncherActivity" >
+        </activity>
+        <activity android:name="com.harris.challenge.secret_agent_tools.RegistrationTool" >
+        </activity>
+        <activity android:name="com.harris.challenge.secret_agent_tools.MasterServerCommunicator" 
+            android:theme="@style/Theme.Transparent">
+        </activity>
+        
        
 
         <service android:name="com.harris.challenge.brata.framework.GPSService" />

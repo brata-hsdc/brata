@@ -1,0 +1,98 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+
+            <TextView
+                android:id="@+id/LabelTimerA"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Timer A"/>
+
+            <EditText
+                android:id="@+id/EditTimerA"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@+id/LabelTimerA"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="number"/>
+
+            <ToggleButton
+                android:id="@+id/ButtonTimerA"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_margin="5dp"
+                android:text="ToggleButton"
+                android:textOff="Inactive"
+                android:textOn="Active"/>
+
+            <TextView
+                android:id="@+id/TextDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/EditTimerA"
+                android:layout_alignBottom="@+id/EditTimerA"
+                android:layout_toRightOf="@+id/EditTimerA"
+                android:text=" secs"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_horizontal"
+            android:layout_margin="5dp">
+
+            <TextView
+                android:id="@+id/LabelCountdown"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Elapsed"/>
+
+            <ToggleButton
+                android:id="@+id/ButtonCountdown"
+                android:layout_width="70dp"
+                android:layout_height="45dp"
+                android:layout_alignParentRight="true"
+                android:layout_margin="5dp"
+                android:text="ToggleButton"
+                android:textOff="Stopped"
+                android:textOn="Activated"/>
+
+            <TextView
+                android:id="@+id/TextCountdown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/LabelCountdown"
+                android:layout_alignBottom="@+id/LabelCountdown"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/LabelCountdown"
+                android:text="0 secs"/>
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

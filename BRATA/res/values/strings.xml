@@ -23,6 +23,7 @@
     <string name="button_request_clue">send fixed msg btn (no typing)</string>
     <string name="incident_title">Incidents</string>
     <string name="tools_title">Tools</string>
+    <string name="sat_challenges_title">SAT Challenges</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="action_settings">Settings</string>
 

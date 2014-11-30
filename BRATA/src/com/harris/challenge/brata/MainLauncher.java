@@ -12,7 +12,8 @@ import android.view.View.OnClickListener;
 public class MainLauncher extends Activity implements OnClickListener{
 	
 	  TextView incidentsLauncher;
-	  TextView toolsLauncher;
+	  TextView brataToolsLauncher;
+	  TextView secretAgentToolsLauncher;
 	
 	  /** Called when the activity is first created. */
 	  @Override
@@ -24,11 +25,13 @@ public class MainLauncher extends Activity implements OnClickListener{
 	        
 	        //setup buttons
 	        incidentsLauncher = (TextView) findViewById(R.id.launchIndicents);
-	        toolsLauncher = (TextView) findViewById(R.id.launchTools);
+	        brataToolsLauncher = (TextView) findViewById(R.id.launchTools);
+	        secretAgentToolsLauncher = (TextView) findViewById(R.id.LaunchChallenges);
 	        
 	        //setup click listeners
 	        incidentsLauncher.setOnClickListener(this);
-	        toolsLauncher.setOnClickListener(this);
+	        brataToolsLauncher.setOnClickListener(this);
+	        secretAgentToolsLauncher.setOnClickListener(this);
 	        
 	  }
 
@@ -42,6 +45,10 @@ public class MainLauncher extends Activity implements OnClickListener{
 			
 		case R.id.launchTools:
 			startActivity(new Intent(this, BrataLauncherActivity.class));
+			break;
+			
+		case R.id.LaunchChallenges:
+			startActivity(new Intent(this, SATChallengeLauncherActivity.class));
 			break;
 		}
 		
