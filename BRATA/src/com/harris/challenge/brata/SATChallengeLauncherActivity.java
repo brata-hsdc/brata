@@ -27,7 +27,7 @@ public class SATChallengeLauncherActivity extends Activity implements OnItemClic
     public void onCreate(Bundle savedInstanceState) {
     	  super.onCreate(savedInstanceState);
           requestWindowFeature(Window.FEATURE_NO_TITLE);
-          setContentView(R.layout.activity_incident);
+          setContentView(R.layout.activity_sat_challenges);
           
           GridView activityGrid = (GridView) findViewById(R.id.mainActivityGrid);
                   

@@ -4,11 +4,30 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/title"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentTop="true"
+	        android:layout_centerInParent="true"
+	        android:textAppearance="@android:style/TextAppearance.Large"
+	        android:layout_margin="8dip"
+            android:text="@string/registration_title"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:orientation="vertical" >
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="30dp" >
 
         <TextView
             android:id="@+id/textView1"
@@ -21,14 +40,24 @@
 
         <EditText
             android:id="@+id/editText_TeamId"
-            android:layout_width="match_parent"
+            android:layout_width="78dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:ems="10" >
+            android:layout_weight="0.96"
+            android:ems="10"
+            android:inputType="number"
+            android:maxLength="5" >
 
             <requestFocus />
         </EditText>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical" >
 
         <Button
             android:id="@+id/button_SubmitTeamID"
@@ -39,6 +68,58 @@
             android:layout_weight="1"
             android:text="Submit Team ID"
             android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="80dp"
+        android:layout_weight="0.0"
+        android:gravity="bottom"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" >
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/label_encodedMsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Encoded Message:  "
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/text_encodedMsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/label_decodedMsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Decoded Message:  "
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/text_decodedMsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
     </LinearLayout>
 

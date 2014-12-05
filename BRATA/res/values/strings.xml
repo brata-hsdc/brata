@@ -24,6 +24,7 @@
     <string name="incident_title">Incidents</string>
     <string name="tools_title">Tools</string>
     <string name="sat_challenges_title">SAT Challenges</string>
+    <string name="registration_title">Team Registration</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="action_settings">Settings</string>
 

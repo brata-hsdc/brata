@@ -1,9 +1,26 @@
+/*------------------------------------------------------------------------------
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *------------------------------------------------------------------------------
+ */
+
 package com.harris.challenge.secret_agent_tools;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.harris.challenge.brata.framework.IntentIntegrator;
 import com.harris.challenge.brata.framework.IntentResult;
@@ -84,11 +101,16 @@ public class MasterServerCommunicator extends Activity{
 	 */
 	protected void sendMessageToMasterServer(String message, String url, String teamId)
 	{
-		Log.i("BRATA", "MasterServerCommunicator  sendMessageToMasterServer()"
+		String dbgMsg = "MasterServerCommunicator  sendMessageToMasterServer()"
     			+ " - Sending message to MasterServer"
-    			+ " - URL:" + url 
-    			+ " - Message: " + message 
-    			+ " - TeamID:" + teamId);
+    			+ " - \nURL:" + url 
+    			+ " - \nMessage: " + message 
+    			+ " - \nTeamID:" + teamId;
+		Log.i("BRATA", dbgMsg);
+		Toast.makeText(getApplicationContext(), dbgMsg, Toast.LENGTH_LONG).show();
+		
+		// TODO Remove
+		onMasterServerResponse("Welcome");
 	}
 	
 	/**
