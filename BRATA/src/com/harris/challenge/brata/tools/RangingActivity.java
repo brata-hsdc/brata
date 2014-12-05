@@ -1,3 +1,19 @@
+/*------------------------------------------------------------------------------
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *------------------------------------------------------------------------------
+ */
+
 package com.harris.challenge.brata.tools;
 
 import android.app.Activity;
@@ -22,130 +38,130 @@ import com.harris.challenge.brata.framework.GPSService.GPSServiceListener;
  *
  */
 public class RangingActivity extends Activity implements OnClickListener, GPSServiceListener{
-	
-	// Distance in meters of earth's equatorial radius
-	final float EARTH_EQUITORIAL_RADIUS_METERS = 6378137.0f;
-	
-	//GPS service used to find location
-	private GPSService gpsService = null;
-	
-	/**
-	 * (non-Javadoc)
-	 * 
-	 * @see android.app.Activity#onCreate(android.os.Bundle)
-	 * 
-	 * This will be called whenever this activity is created.
-	 */
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
 
-		// This applies the layout specified in
-		// res->layout->activity_request_clue.xml
-		// to our Activity. We can now find views within that layout and
-		// manipulate them. Don't try to call findViewById() before this!
-		setContentView(R.layout.activity_ranging);
-		
-		// The GPS Service runs independently of the applications 
-		// activities.  The bindService() function allows this 
-		// activity to interact to the GPS service to retrieve location  
-		// information. 
-		Intent serviceIntent = new Intent(this, GPSService.class);
-		bindService(serviceIntent, this, Context.BIND_AUTO_CREATE);
-	}
-	
-	/**
-	 * This activity returns to the foreground.  The activity becomes active.
-	 */
-	@Override
-	protected void onResume() {
-		// Rebind activity to gps service
-		Intent mServiceIntent = new Intent(this, GPSService.class);
+    // Distance in meters of earth's equatorial radius
+    final float EARTH_EQUITORIAL_RADIUS_METERS = 6378137.0f;
+
+    //GPS service used to find location
+    private GPSService gpsService = null;
+
+    /**
+     * (non-Javadoc)
+     * 
+     * @see android.app.Activity#onCreate(android.os.Bundle)
+     * 
+     * This will be called whenever this activity is created.
+     */
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // This applies the layout specified in
+        // res->layout->activity_request_clue.xml
+        // to our Activity. We can now find views within that layout and
+        // manipulate them. Don't try to call findViewById() before this!
+        setContentView(R.layout.activity_ranging);
+
+        // The GPS Service runs independently of the applications 
+        // activities.  The bindService() function allows this 
+        // activity to interact to the GPS service to retrieve location  
+        // information. 
+        Intent serviceIntent = new Intent(this, GPSService.class);
+        bindService(serviceIntent, this, Context.BIND_AUTO_CREATE);
+    }
+
+    /**
+     * This activity returns to the foreground.  The activity becomes active.
+     */
+    @Override
+    protected void onResume() {
+        // Rebind activity to gps service
+        Intent mServiceIntent = new Intent(this, GPSService.class);
         bindService(mServiceIntent, this, Context.BIND_AUTO_CREATE);
-		super.onResume();
-	}
-	
-	/**
-	 * The activity is finished running
-	 */
-	@Override
-	protected void onStop() {
-		super.onStop();
-		unbindService(this);
-	}
+        super.onResume();
+    }
 
-	/**
-	 * Called when the connection with the GPS service is established
-	 * 
-	 * @param ComponentName
-	 * @param service binder
-	 */
-	@Override
-	public void onServiceConnected(ComponentName className, IBinder binder) {
-		  // Because we have bound to an explicit
+    /**
+     * The activity is finished running
+     */
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unbindService(this);
+    }
+
+    /**
+     * Called when the connection with the GPS service is established
+     * 
+     * @param ComponentName
+     * @param service binder
+     */
+    @Override
+    public void onServiceConnected(ComponentName className, IBinder binder) {
+          // Because we have bound to an explicit
         // service that is running in our own process, we can
         // cast its IBinder to a concrete class and directly access it.
-		Toast.makeText(getBaseContext(), "GPS service connected", Toast.LENGTH_SHORT).show();
-		GPSService.LocalBinder gpsBinder = (GPSService.LocalBinder) binder;
-		GPSService gpsService = gpsBinder.getService();
-		gpsService.addGPSListener(RangingActivity.this);
-	}
+        Toast.makeText(getBaseContext(), "GPS service connected", Toast.LENGTH_SHORT).show();
+        GPSService.LocalBinder gpsBinder = (GPSService.LocalBinder) binder;
+        GPSService gpsService = gpsBinder.getService();
+        gpsService.addGPSListener(RangingActivity.this);
+    }
 
-	/**
-	 * Called when the connection with the GPS service disconnects
-	 * 
-	 * @param classname
-	 */
-	@Override
-	public void onServiceDisconnected(ComponentName className) {
-		if(gpsService != null) 
-    	{
-    		gpsService.removeGPSListener(RangingActivity.this);
-    	}
-	}
+    /**
+     * Called when the connection with the GPS service disconnects
+     * 
+     * @param classname
+     */
+    @Override
+    public void onServiceDisconnected(ComponentName className) {
+        if(gpsService != null) 
+        {
+            gpsService.removeGPSListener(RangingActivity.this);
+        }
+    }
 
-	/**
-	 * Takes action on each new location update
-	 * 
-	 * @param location 
-	 */
-	public void onLocationChanged(Location location) {
-		
-		double latitude = location.getLatitude();
-		double longitude = location.getLongitude();
-		
-		// Use Toast to display a messages briefly. It is a great tool
-		// for debugging.  It is useful for determining the details of
-		// an event such as a button press as well as when it occurred.  
-		// However Android's Log tool is a better alternative for
-		// debugging multiple recurring events and application crashes. 
-		// Set this variable to true to view the GPS toast message.
-		boolean GPS_show_updates = false;
-		
-		// The default GPS update time is 3 seconds.  You can set this to a 
-		// different time by changing GPSUpdateDelay in GPSService.java.  
-		// You should disable this toast message if that time is less than 2 secs.
-		if(GPS_show_updates)
-		{
-			Toast.makeText(getBaseContext(), 
-				"Latitude: "+latitude+
-				"; Longitude: "+longitude,
+    /**
+     * Takes action on each new location update
+     * 
+     * @param location 
+     */
+    public void onLocationChanged(Location location) {
+
+        double latitude = location.getLatitude();
+        double longitude = location.getLongitude();
+
+        // Use Toast to display a messages briefly. It is a great tool
+        // for debugging.  It is useful for determining the details of
+        // an event such as a button press as well as when it occurred.  
+        // However Android's Log tool is a better alternative for
+        // debugging multiple recurring events and application crashes. 
+        // Set this variable to true to view the GPS toast message.
+        boolean GPS_show_updates = false;
+
+        // The default GPS update time is 3 seconds.  You can set this to a 
+        // different time by changing GPSUpdateDelay in GPSService.java.  
+        // You should disable this toast message if that time is less than 2 secs.
+        if(GPS_show_updates)
+        {
+            Toast.makeText(getBaseContext(), 
+                "Latitude: "+latitude+
+                "; Longitude: "+longitude,
                 Toast.LENGTH_SHORT).show();
-		}
-		
-		new Handler().post(new Runnable() {
-			public void run() {
+        }
 
-			}
-		});
-		
-	}
+        new Handler().post(new Runnable() {
+            public void run() {
+
+            }
+        });
+
+    }
 
     /**
      * Use this method to hook into click methods for buttons
      */
-	public void onClick(View view) {
-	
-		
-	}
+    public void onClick(View view) {
+
+
+    }
 }

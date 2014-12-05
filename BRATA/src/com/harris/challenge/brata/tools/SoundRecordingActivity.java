@@ -1,3 +1,19 @@
+/*------------------------------------------------------------------------------
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *------------------------------------------------------------------------------
+ */
+
 package com.harris.challenge.brata.tools;
 
 import java.io.File;
@@ -34,34 +50,34 @@ import com.harris.challenge.brata.R;
  *
  */
 public class SoundRecordingActivity extends Activity {
-	/**
-	 * Tag to track errors in LogCat
-	 */
-	private static final String LOG_TAG = "SoundRecordingActivity";
-	
-	/**
-	 * Directory where recordings are kept
-	 */
-	private static String mFolder = null;
-	
-	/**
-	 * Recording state (true means ready to record, false means recording)
-	 */
-	private boolean mStartRecording = true;
-	
-	/**
-	 * Playback state (true means ready to play, false means playing)
-	 */
-	private boolean mStartPlaying = true;
-	
-	/**
-	 * Handle to the record button
-	 */
-	private Button mRecordButton = null;
-	
-	/**
-	 * Handle to the MediaRecorder
-	 */
+    /**
+     * Tag to track errors in LogCat
+     */
+    private static final String LOG_TAG = "SoundRecordingActivity";
+
+    /**
+     * Directory where recordings are kept
+     */
+    private static String mFolder = null;
+
+    /**
+     * Recording state (true means ready to record, false means recording)
+     */
+    private boolean mStartRecording = true;
+
+    /**
+     * Playback state (true means ready to play, false means playing)
+     */
+    private boolean mStartPlaying = true;
+
+    /**
+     * Handle to the record button
+     */
+    private Button mRecordButton = null;
+
+    /**
+     * Handle to the MediaRecorder
+     */
     private MediaRecorder mRecorder = null;
 
     /**
@@ -88,19 +104,19 @@ public class SoundRecordingActivity extends Activity {
      * Constructor. Sets the directory for recordings storage
      */
     public SoundRecordingActivity() {
-    	mFolder = Environment.getExternalStorageDirectory().getAbsolutePath();
-    	mFolder += "/brata/";
-    	
-    	File brataDir = new File(mFolder);
-    	brataDir.mkdirs();
-    	
-    	filesList = new String[]{
-    			"Recording1", 
-    			"Recording2",
-    			"Recording3",
-    			"Recording4",
-    			"Recording5",
-    	};
+        mFolder = Environment.getExternalStorageDirectory().getAbsolutePath();
+        mFolder += "/brata/";
+
+        File brataDir = new File(mFolder);
+        brataDir.mkdirs();
+
+        filesList = new String[]{
+                "Recording1", 
+                "Recording2",
+                "Recording3",
+                "Recording4",
+                "Recording5",
+        };
     }
     
     /**
@@ -108,7 +124,7 @@ public class SoundRecordingActivity extends Activity {
      */
     private void setUpSoundFiles()
     {
-    	for (int i = 0; i<filesList.length; i++) {
+        for (int i = 0; i<filesList.length; i++) {
             
             RadioButton radioButton = new RadioButton(this);
             radioButton.setText(filesList[i]);  
@@ -116,10 +132,9 @@ public class SoundRecordingActivity extends Activity {
                       
             if(i == 0)
             {
-            	filesGroup.check(radioButton.getId());
+                filesGroup.check(radioButton.getId());
             }
-		}
-    	
+        }
     }
     
     /**
@@ -128,8 +143,8 @@ public class SoundRecordingActivity extends Activity {
      */
     private String getCurrentFile()
     {
-    	 return mFolder + 
-    			 ((RadioButton) findViewById(filesGroup.getCheckedRadioButtonId())).getText().toString();
+         return mFolder + 
+                 ((RadioButton) findViewById(filesGroup.getCheckedRadioButtonId())).getText().toString();
     }
     
     /**
@@ -248,43 +263,42 @@ public class SoundRecordingActivity extends Activity {
     /**
      * Listener for when the user clicks the record button
      */
-	OnClickListener record = new OnClickListener() {
-		public void onClick(View v) {
-			onRecord(mStartRecording);
+    OnClickListener record = new OnClickListener() {
+        public void onClick(View v) {
+            onRecord(mStartRecording);
             if (mStartRecording) {
                 mRecordButton.setText("Stop recording");
             } else {
-            	mRecordButton.setText("Start recording");
+                mRecordButton.setText("Start recording");
             }
             mStartRecording = !mStartRecording;
-		}
-	};
-	
+        }
+    };
+
     /**
      * Listener for when the user clicks the play button
      */
-	OnClickListener play = new OnClickListener() {
-		public void onClick(View v) {
+    OnClickListener play = new OnClickListener() {
+        public void onClick(View v) {
             onPlay(mStartPlaying);
             if (mStartPlaying) {
                 mPlayButton.setText("Stop playing");
             } else {
-            	mPlayButton.setText("Start playing");
+                mPlayButton.setText("Start playing");
             }
             mStartPlaying = !mStartPlaying;
-		}
-	};
-	
-	/**
-	 * Listener for when playback completed to set button in correct state
-	 */
-	OnCompletionListener playCompleted = new OnCompletionListener() {
+        }
+    };
 
-		@Override
-		public void onCompletion(MediaPlayer arg0) {
-			mStartPlaying = true;
-			mPlayButton.setText("Start playing");
-		}
-		
-	};
+    /**
+     * Listener for when playback completed to set button in correct state
+     */
+    OnCompletionListener playCompleted = new OnCompletionListener() {
+
+        @Override
+        public void onCompletion(MediaPlayer arg0) {
+            mStartPlaying = true;
+            mPlayButton.setText("Start playing");
+        }
+    };
 }

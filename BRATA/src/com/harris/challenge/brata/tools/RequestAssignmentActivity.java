@@ -1,3 +1,19 @@
+/*------------------------------------------------------------------------------
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *------------------------------------------------------------------------------
+ */
+
 package com.harris.challenge.brata.tools;
 
 import com.harris.challenge.brata.R;
@@ -43,20 +59,20 @@ public class RequestAssignmentActivity extends Activity implements OnClickListen
      * @see android.view.View.OnClickListener#onClick(android.view.View)
      */
     public void onClick(View view) {
-    	// In this example, we only have one button. However, if you had 
-    	// several buttons, all of them set to use this Activity as their click
-    	// listener, you can figure out which button was clicked by doing a
-    	// switch() on the button's view id.
-    	switch(view.getId()) {
-    	
-    	}
+        // In this example, we only have one button. However, if you had 
+        // several buttons, all of them set to use this Activity as their click
+        // listener, you can figure out which button was clicked by doing a
+        // switch() on the button's view id.
+        switch(view.getId()) {
+
+        }
     }
     
     /**
      * Performs the actual submission of text
      * 
      * @param text
-     * 		the text to be submitted
+     *         the text to be submitted
      */
     private void submitText(String text) {
         
@@ -84,32 +100,31 @@ public class RequestAssignmentActivity extends Activity implements OnClickListen
      * to our BRATA app.  It should be used to decode the clue and display it on the screen.
      * 
      * @param EncodedClue
-     * 		the encoded clue
+     *         the encoded clue
      */
     public static void DecodeReceivedMsg(String encodedMsg, Context context)
     {
-    	if (ResponseTextView != null)
-    	{
-	        String decodedMsg = encodedMsg;	        	       
-	        
-	        /*
-	         * 
-	         * Put clue decoding logic here
-	         * by the end of your code the 
-	         * decoded text string should 
-	         * be in your decodedClue variable
-	         * 
-	         */
-	        
-	        myResponse = decodedMsg;
-	         
-	        ResponseTextView.setText(myResponse);
-	        
-		     // this code will cause a brief message to be displayed on the screen
-		     Toast.makeText(context, "Msg Decoded : "+ myResponse, 
-		    		        Toast.LENGTH_LONG).show();		        
-    	}
-         
+        if (ResponseTextView != null)
+        {
+            String decodedMsg = encodedMsg;
+
+            /*
+             * 
+             * Put clue decoding logic here
+             * by the end of your code the 
+             * decoded text string should 
+             * be in your decodedClue variable
+             * 
+             */
+
+            myResponse = decodedMsg;
+
+            ResponseTextView.setText(myResponse);
+
+             // this code will cause a brief message to be displayed on the screen
+             Toast.makeText(context, "Msg Decoded : "+ myResponse, 
+                            Toast.LENGTH_LONG).show();
+        }
     } 
     
     /**
@@ -118,7 +133,7 @@ public class RequestAssignmentActivity extends Activity implements OnClickListen
      */    
     public void onBackPressed()
     {
-    	ResponseTextView = null;
-    	finish();
+        ResponseTextView = null;
+        finish();
     }     
 }
