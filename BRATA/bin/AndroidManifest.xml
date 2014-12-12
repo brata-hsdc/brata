@@ -18,6 +18,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:icon="@drawable/ic_launcher"
@@ -93,6 +94,17 @@
         <activity
             android:name="com.harris.challenge.brata.MainActivity"
             android:label="@string/title_activity_main" >
+        </activity>
+        
+        <activity android:name="com.harris.challenge.brata.framework.UriEntryActivity">
+               <intent-filter>
+                  <action android:name="android.intent.action.MAIN"/>
+                  <category android:name="android.intent.category.DEFAULT"/>
+               </intent-filter>
+               <intent-filter>
+                  <action android:name="com.google.zxing.client.android.SCAN"/>
+                  <category android:name="android.intent.category.DEFAULT"/>
+               </intent-filter>
         </activity>
     </application>
 

@@ -20,7 +20,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.harris.challenge.brata.framework.IntentIntegrator;
 import com.harris.challenge.brata.framework.IntentResult;
@@ -82,7 +81,7 @@ public class MasterServerCommunicator extends Activity{
 		Bundle extras = getIntent().getExtras();
 		if (extras == null || extras.getString(MESSAGE_TO_SEND) == null) {
 			Log.w("BRATA", "MasterServerCommunicator  onActivityResult() - "
-					+ "Returned scanResult is null.");
+					+ "Returned message is null.");
 		     finish();
 		     return;
 		}
@@ -93,26 +92,10 @@ public class MasterServerCommunicator extends Activity{
 		String message = extras.getString(MESSAGE_TO_SEND);
     	String QRMessageUrl = scanResult.getContents();
     	Log.i("BRATA", "MasterServerCommunicator  onActivityResult() - QRcode result received.");
-    	sendMessageToMasterServer(message, QRMessageUrl, RegistrationTool.TeamRegistrationId);
+    	ServerQueryTask serverQueryTask = new ServerQueryTask(this, QRMessageUrl, RegistrationTool.TeamRegistrationId);
+    	serverQueryTask.execute(message);
     }
-	
-	/**
-	 * TODO: Send off message to Master Server
-	 */
-	protected void sendMessageToMasterServer(String message, String url, String teamId)
-	{
-		String dbgMsg = "MasterServerCommunicator  sendMessageToMasterServer()"
-    			+ " - Sending message to MasterServer"
-    			+ " - \nURL:" + url 
-    			+ " - \nMessage: " + message 
-    			+ " - \nTeamID:" + teamId;
-		Log.i("BRATA", dbgMsg);
-		Toast.makeText(getApplicationContext(), dbgMsg, Toast.LENGTH_LONG).show();
-		
-		// TODO Remove
-		onMasterServerResponse("Welcome");
-	}
-	
+
 	/**
 	 * TODO: We must somehow listen to the returned result from the MasterServer 
 	 */
