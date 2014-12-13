@@ -13,7 +13,6 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -61,7 +60,7 @@ public class ServerQueryTask extends AsyncTask<String, Void, String> {
     			+ " - \nURL:" + serverUrl 
     			+ " - \nMessage: " + params[0] 
     			+ " - \nTeamID:" + teamId;
-		Log.i("BRATA", dbgMsg);
+		Log.d("BRATA", dbgMsg);
 		
 		JSONObject requestBody = new JSONObject();
 		try
@@ -78,7 +77,7 @@ public class ServerQueryTask extends AsyncTask<String, Void, String> {
 		
 		HttpClient client = new DefaultHttpClient();
 		HttpPost request = new HttpPost(serverUrl);
-		request.addHeader("Accept", "application/json");
+		request.addHeader("Content-Type", "application/json");
  		 
 		try
 		{
@@ -98,7 +97,8 @@ public class ServerQueryTask extends AsyncTask<String, Void, String> {
 		    else if(statusLine.getStatusCode() != HttpStatus.SC_OK)
 		    {
 			    Log.w("BRATA", "ServerQueryTask  doInBackground() - "
-						+ "HTTP status not ok: " + statusLine.getStatusCode());
+						+ "HTTP status not ok: " + statusLine.getStatusCode()
+						+ " " + statusLine.getReasonPhrase());
 			    return encodedResponse;
 		    }
 		    else if (httpEntity == null)
@@ -112,6 +112,10 @@ public class ServerQueryTask extends AsyncTask<String, Void, String> {
 		        ByteArrayOutputStream out = new ByteArrayOutputStream();
 		        httpEntity.writeTo(out);
 		        out.close();
+
+			    Log.d("BRATA", "ServerQueryTask  doInBackground() - "
+						+ "HTTP Response: " + httpEntity.toString()
+						+ " --- " + out.toString());
 		        JSONObject responseBody = new JSONObject(out.toString());
 		        encodedResponse = responseBody.getString("message");
 		    }
@@ -154,8 +158,10 @@ public class ServerQueryTask extends AsyncTask<String, Void, String> {
 	    }
 		String dbgMsg = "ServerQueryTask  onPostExecute()"
     			+ " - Message from server: " + result;
-		Log.i("BRATA", dbgMsg);
-        // TODO Give the result back to the caller and finish MasterServerCommunicator
+		Log.d("BRATA", dbgMsg);
+		
+		MessageDecoder.decodeResponse(result);
+
 		callingActivity.finish();
 	}
 }

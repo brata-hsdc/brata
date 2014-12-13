@@ -96,16 +96,6 @@ public class MasterServerCommunicator extends Activity{
     	serverQueryTask.execute(message);
     }
 
-	/**
-	 * TODO: We must somehow listen to the returned result from the MasterServer 
-	 */
-	protected void onMasterServerResponse(Object encodedMessage)
-	{
-		String encodedString = encodedMessage.toString();
-		MessageDecoder.decodeResponse(encodedString);
-		finish();
-	}
-	
 //	/**
 //	 * Track changes to MasterServer Activity state for troubleshooting
 //	 */

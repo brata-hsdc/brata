@@ -31,11 +31,6 @@ import com.harris.challenge.brata.R;
 public class RegistrationTool extends Activity {
 	
 	/**
-	 * Message used to register a team ID with the MasterServer
-	 */
-	final String MS_REGISTRATION_MESSAGE = "Register";
-	
-	/**
 	 * Variable for holding the teams 5 digit ID; 
 	 * Publicly accessible to other activities
 	 */
@@ -93,7 +88,7 @@ public class RegistrationTool extends Activity {
 			@Override
 			public void onClick(View v) {
 				// Auto-generated method stub
-				MasterServerCommunicator.getMessageUsingQR(RegistrationTool.this, MS_REGISTRATION_MESSAGE);
+				MasterServerCommunicator.getMessageUsingQR(RegistrationTool.this, "");
 			}
 		});
 	}
