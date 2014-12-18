@@ -71,10 +71,18 @@
         
         <activity android:name="com.harris.challenge.brata.SATChallengeLauncherActivity" >
         </activity>
-        <activity android:name="com.harris.challenge.secret_agent_tools.RegistrationTool" >
-        </activity>
         <activity android:name="com.harris.challenge.secret_agent_tools.MasterServerCommunicator" 
             android:theme="@style/Theme.Transparent">
+        </activity>
+        <activity android:name="com.harris.challenge.secret_agent_tools.RegistrationTool" >
+        </activity>
+        <activity android:name="com.harris.challenge.secret_agent_tools.CrackTheSafe" >
+        </activity>
+        <activity android:name="com.harris.challenge.secret_agent_tools.HyperMutationBomb" >
+        </activity>
+        <activity android:name="com.harris.challenge.secret_agent_tools.FindTheSecretLaboratory" >
+        </activity>
+        <activity android:name="com.harris.challenge.secret_agent_tools.CaptureProfessorAardvark" >
         </activity>
         
        

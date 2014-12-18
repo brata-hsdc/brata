@@ -41,7 +41,7 @@ public class MessageDecoder {
 	 * Example:
 	 * decodeResponse("U__sFLeou_rktcehe!e,~"); should return a result of "Use_the_Force,_Luke!~"
 	 */
-	static String decodeResponse(String encodedString)
+	public static String decodeResponse(String encodedString)
 	{
 		MessageDecoder.encodedMessage = encodedString;
 		

@@ -1,4 +1,4 @@
-package com.harris.challenge.secret_agent_tools;
+package com.harris.challenge.brata.framework;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -15,6 +15,8 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.harris.challenge.secret_agent_tools.MessageDecoder;
 
 import android.app.Activity;
 import android.app.ProgressDialog;

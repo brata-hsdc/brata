@@ -88,7 +88,7 @@ public class RegistrationTool extends Activity {
 			@Override
 			public void onClick(View v) {
 				// Auto-generated method stub
-				MasterServerCommunicator.getMessageUsingQR(RegistrationTool.this, "");
+				MasterServerCommunicator.getInstructionUsingQR(RegistrationTool.this);
 			}
 		});
 	}

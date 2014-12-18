@@ -23,22 +23,35 @@ import android.util.Log;
 
 import com.harris.challenge.brata.framework.IntentIntegrator;
 import com.harris.challenge.brata.framework.IntentResult;
+import com.harris.challenge.brata.framework.ServerQueryTask;
 
 public class MasterServerCommunicator extends Activity{	
 	
 	final static String MESSAGE_TO_SEND = "MESSAGE_TO_SEND";
 	
 	/**
+	 * Initiate the process of scanning a QR code and decoding the returned response.  
+	 * Static method available for all SAT Challenge activities to use.
+	 * 
+	 * @param activity  The calling activity (Input for this parameter usually 
+	 * 					will be 'this'). 
+	 */
+	public static void getInstructionUsingQR(Activity activity)
+	{
+		sendMessageUsingQR(activity, "");
+	}
+	
+	/**
 	 * Initiate the process of scanning a QR code, sending the message to the 
 	 * MasterServer and decoding the returned response.  Static method available 
-	 * for other SAT Challenge activities to use.
+	 * for all SAT Challenge activities to use.
 	 * 
 	 * @param activity  The calling activity (Input for this parameter usually 
 	 * 					will be 'this'). 
 	 * @param message 	The string message to send to the master server after 
 	 * 					the QR code URL has been returned.
 	 */
-	static void getMessageUsingQR(Activity activity, String message)
+	public static void sendMessageUsingQR(Activity activity, String message)
 	{
 		Intent intent = new Intent(activity, MasterServerCommunicator.class);
 		intent.putExtra(MESSAGE_TO_SEND, message);

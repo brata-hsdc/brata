@@ -25,7 +25,7 @@ import android.content.Intent;
 public class ActivityItem {
     CharSequence mLabel;
     int mIcon;
-    Intent mActivity;
+    public Intent mActivity;
 
     public ActivityItem(CharSequence label, int iconResource, Intent target) {
         mLabel = label;

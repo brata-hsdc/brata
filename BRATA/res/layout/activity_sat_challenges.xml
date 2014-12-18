@@ -21,16 +21,16 @@
 	  android:gravity="center"
 	  android:layout_gravity="center">
 	  
-	    <GridView 
-	      android:id="@+id/mainActivityGrid"
-	      android:layout_margin="8dip"
-	      android:horizontalSpacing="8dp"
-	      android:verticalSpacing="24dp"
-	      android:numColumns="auto_fit"
-	      android:layout_width="fill_parent"
-	      android:layout_height="wrap_content"
-	      android:stretchMode="columnWidth"
-	      android:gravity="center" />
+	    <GridView
+	        android:id="@+id/mainActivityGrid"
+	        android:layout_width="fill_parent"
+	        android:layout_height="390dp"
+	        android:layout_margin="8dip"
+	        android:gravity="center"
+	        android:horizontalSpacing="8dp"
+	        android:numColumns="auto_fit"
+	        android:stretchMode="columnWidth"
+	        android:verticalSpacing="24dp" />
 	    
 	</LinearLayout>
 
