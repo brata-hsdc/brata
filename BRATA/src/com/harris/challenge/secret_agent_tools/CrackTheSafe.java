@@ -27,17 +27,7 @@ public class CrackTheSafe extends Activity{
         super.onCreate(savedInstanceState);
         // load the xml layout before initializing widgets
         setContentView(R.layout.activity_crack_the_safe);
-        Log.d("Brata", myHash( 70, 49,  1 ));
-        Log.d("Brata", myHash( 35, 82, 49 ));
-   		Log.d("Brata", myHash(  9, 26, 48 ));
-   		Log.d("Brata", myHash( 53, 43, 12 ));
-		Log.d("Brata", myHash(  5, 88, 78 ));
-		Log.d("Brata", myHash( 17, 56, 79 ));
-		Log.d("Brata", myHash( 47, 18,  8 ));
-		Log.d("Brata", myHash( 34, 14, 23 ));
-		Log.d("Brata", myHash( 79, 63, 13 ));
-		Log.d("Brata", myHash( 68, 59, 12 ));
-		
+
 		buttonStartChallenge = (Button)findViewById(R.id.buttonCtsStartChallenge);
 		buttonStartChallenge.setOnClickListener(new Button.OnClickListener() {
 			@Override
@@ -114,22 +104,17 @@ public class CrackTheSafe extends Activity{
 	
 	
 	/**
-     * Function used to test all possible permutation for 3 of the 5 measured 
-     * angles to see if it matches the 4 character clue.  If the function
-     * returns the correct 3 ordered digits this should be displayed on the screen. 
-     * This function should be called from the onClickListener of the check code button.
+     * This function should be called from the onClickListener of a compute button.  This
+     * function should test all possible 3 permutations of the 5 measured angles on myHash() 
+     * The correct answer will be a set of 3 digits in a specific order that gets myHash() to 
+     * returns a string matching the 4 character clue. Display the answer on the screen. Once you 
+     * are sure you have the right answer you should send it as a message to the master server.
      * 
      * @param a-e: the measured angles to check
-     * @return If successful should return an array of 3 digits in the order 
-     * needed to generate the clue using myHash(). Otherwise return null.
      */
-	public int[] checkPermutations(int a, int b, int c, int d, int e)
+	public void computeCtsAnswer(int a, int b, int c, int d, int e)
 	{
-		int[] safeDigits = null;
-		// Check result from myHash(a, b, c)
-		// If no permutations produce the 4 character clue using myHash() then return null
-		// Otherwise return the 3 digits in the array with the order that produces the clue string 
-		return safeDigits;
+		// Check result from myHash(a, b, c) until it returns the 4 character clue 
 	}
 	
 	/**
@@ -137,21 +122,8 @@ public class CrackTheSafe extends Activity{
      * string given 3 integers. The integers are angles in the range 0..90. 
      * No need for modification.
      */
-	public static String myHash( int a, int b, int c ) {
-	    // The following can be used to "test" for Python equivalence
-	    //   myHash( 70, 49,  1 ) = "rmWn"    myHash( 35, 82, 49 ) = "wRTS"
-	    //   myHash(  9, 26, 48 ) = "KMWG"    myHash( 53, 43, 12 ) = "PPDd"
-	    //   myHash(  5, 88, 78 ) = "kBJD"    myHash( 17, 56, 79 ) = "ckcK"
-	    //   myHash( 47, 18,  8 ) = "ZkmZ"    myHash( 34, 14, 23 ) = "hHrR"
-	    //   myHash( 90,  9, 58 ) = "twsw"    myHash( 81, 55, 23 ) = "RLhs"
-	    //   myHash( 75, 20, 31 ) = "gdNq"    myHash( 63, 34,  1 ) = "gBqj"
-	    //   myHash( 13, 56,  4 ) = "GzCJ"    myHash( 89, 49, 16 ) = "Bvgw"
-	    //   myHash( 34, 72, 87 ) = "vKBS"    myHash( 37, 46, 76 ) = "nzCT"
-	    //   myHash( 70, 86, 26 ) = "qddn"    myHash( 16, 78, 27 ) = "DpMK"
-	    //   myHash( 79, 63, 13 ) = "Vktr"    myHash( 68, 59, 12 ) = "pVnm"
-	    
+	public static String myHash( int a, int b, int c ) {	    
 	    String XLATE = "BCDGHJKLMNPQRSTVWZbcdghjkmnpqrstvwz";
-
 	    int h = (a*127 + b)*127 + c;
 	    char[] k = new char[4];
 	    for ( int i = 0; i < 4; i++ ) {
@@ -160,20 +132,20 @@ public class CrackTheSafe extends Activity{
 	    }
 	    return new String( k );
 	}
-	
-	/**
-     * Function for sending correct answer to MasterServer. This function 
-	 * should be called in the onClickListener of the solve button. 
-	 * 
-	 * @param code: Array of 3 digits in the order needed to generate the clue 
-	 *        using myHash()
-     */
-	void crackTheSafe(int[] code)
-	{
-		String message = "Insert correctly formatted message containing the code.";
-		MasterServerCommunicator.sendMessageUsingQR(CrackTheSafe.this, message);
-	}
-	
+
+// May not need this
+//	/**
+//     * Function for calculating and displaying 
+//	 * 
+//	 * @param code: Array of 3 digits in the order needed to generate the clue 
+//	 *        using myHash()
+//     */
+//	void computeAnswer(int[] code)
+//	{
+//		String message = "Insert correctly formatted message containing the code.";
+//		MasterServerCommunicator.sendMessageUsingQR(CrackTheSafe.this, message);
+//	}
+//	
 	
 	/**
      * Display a dialog for confirmation before leaving this activity 
