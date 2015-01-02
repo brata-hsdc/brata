@@ -21,36 +21,36 @@ package com.harris.challenge.secret_agent_tools;
  * Class to hold and interpret data returned from the MasterServer.  
  */
 public class MessageDecoder {
-	
-	/**
-	 * Variable for holding the last encoded message return from 
-	 * the MasterServer; Publicly accessible to other activities
-	 */
-	static String encodedMessage = "---";
-	
-	/**
-	 * Variable for holding the decoded result of the last message return
-	 * from the MasterServer; Publicly accessible to other activities
-	 */
-	static String decodedMessage = "---";
-	
-	/**
-	 * Function for getting a decoded message given an encoded message.  
-	 * Each team must implement this function.
-	 * 
-	 * Example:
-	 * decodeResponse("U__sFLeou_rktcehe!e,~"); should return a result of "Use_the_Force,_Luke!~"
-	 */
-	public static String decodeResponse(String encodedString)
-	{
-		MessageDecoder.encodedMessage = encodedString;
-		
-		/*
-		 * Put code here to decode the encodedString and set result.
-		 * Also be sure to set decodedMessage to the result.
-		 */
-		String result = encodedString;
-		MessageDecoder.decodedMessage = result;
-		return result;
-	}
+    
+    /**
+     * Variable for holding the last encoded message return from 
+     * the MasterServer; Publicly accessible to other activities
+     */
+    static String encodedMessage = "---";
+    
+    /**
+     * Variable for holding the decoded result of the last message return
+     * from the MasterServer; Publicly accessible to other activities
+     */
+    static String decodedMessage = "---";
+    
+    /**
+     * Function for getting a decoded message given an encoded message.  
+     * Each team must implement this function.
+     * 
+     * Example:
+     * decodeResponse("U__sFLeou_rktcehe!e,~"); should return a result of "Use_the_Force,_Luke!~"
+     */
+    public static String decodeResponse(String encodedString)
+    {
+        MessageDecoder.encodedMessage = encodedString;
+        
+        /*
+         * Put code here to decode the encodedString and set result.
+         * Also be sure to set decodedMessage to the result.
+         */
+        String result = encodedString;
+        MessageDecoder.decodedMessage = result;
+        return result;
+    }
 }

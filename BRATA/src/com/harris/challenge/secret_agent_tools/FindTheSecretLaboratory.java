@@ -35,7 +35,7 @@ public class FindTheSecretLaboratory extends Activity{
 		super.onResume();
 		// Here update the correct TextView with MessageDecoder.decodedMessage any time the activity is resumed.
 	}
-	
+    
 	/**
      * Display a dialog for confirmation before leaving this activity 
      * using the back button.  The back button with exit this activity
