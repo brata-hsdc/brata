@@ -17,6 +17,7 @@
 package com.harris.challenge.secret_agent_tools;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -34,7 +35,8 @@ public class RegistrationTool extends Activity {
 	 * Variable for holding the teams 5 digit ID; 
 	 * Publicly accessible to other activities
 	 */
-	public static String TeamRegistrationId = "";
+	public String TeamRegistrationId = "";
+	public static String TEAM_ID_KEY = "TeamID";
 	
 	/**
 	 * Registration tool widgets 
@@ -88,6 +90,9 @@ public class RegistrationTool extends Activity {
 			@Override
 			public void onClick(View v) {
 				// Auto-generated method stub
+				SharedPreferences.Editor editor = getSharedPreferences("BRATA", 0).edit();
+				editor.putString(TEAM_ID_KEY, TeamRegistrationId);
+				editor.commit();
 				MasterServerCommunicator.getInstructionUsingQR(RegistrationTool.this);
 			}
 		});

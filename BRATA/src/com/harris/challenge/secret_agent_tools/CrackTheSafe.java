@@ -1,5 +1,9 @@
 package com.harris.challenge.secret_agent_tools;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface.OnClickListener;
@@ -11,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.harris.challenge.brata.BrataLauncherActivity;
 import com.harris.challenge.brata.R;
 
 
@@ -39,82 +44,40 @@ public class CrackTheSafe extends Activity{
 			     * MasterServerCommunicator.sendMessageUsingQR(ActivityName.this, message);
 			     * 
 			     * In this case the MasterServer will update your progress and send back a clue that must
-			     * be decoded. The decoded string MessageDecoder.decodedMessage is a public variable that 
-			     * should be displayed on all challenge activities. See MessageDecoder.java for details 
-			     * about messages received from the MasterServer.
+			     * be decoded. 
 			     */
 				MasterServerCommunicator.getInstructionUsingQR(CrackTheSafe.this);
 			}
 		});
     }
-	
+    
 	/**
-	 * Function which handles the result from another activity for a measured angle.
-	 * 
-	 * @param requestCode: Can be used to check this is the response for the correct request.
-	 * @param resultCode: Can be used to check the success status of the request
-	 * @param intent: The intent containing the result
-	 * 
-	 * Note: 
-	 * Use the function below to start the appropriate BRATA tool activity 
-	 * which can measure an angle and return the angle as result.  The function 
-	 * should be called in the onClickListener of the measure angle button.
-	 * 
-	 * startActivityForResult(BrataToolActivity.class, 0);
-	 * 
-     * In response to startActivityForResult(...) this function, onActivityResult(..., Intent intent) 
-     * is called when the activity fulfilling the request finishes.  This function should try to get 
-     * the result returned in the Intent. The Brata tool activity or the activity serving a request, 
-     * should set the result (in this case the measured angle) and exit, returning to the requesting 
-     * activity like so.  
-	 * 
-	 * double value = .. // Some value we want to return  
-	 * Intent result = new Intent();              
-	 * result.putExtra(<key_string>, value);
-     * setResult(Activity.RESULT_OK, result);
-     * finish();
-     * 
-     * The result can be extracted using the using a method like this:
-	 * 
-	 * double value = intent.getDoubleExtra(<key_string>, ...);
-	 * 
-     * <key_string> must match in the requesting and serving activities to get a valid result value.
-     * This method for communicating between activities will be used with other 
-     * SAT challenges to get results from Brata tools.
+	 * If the activity gets onResume update the screen with the decoded MasterServer response data.  This 
+	 * event will be triggered after MasterServerCommunicator.getInstructionUsingQR() or 
+	 * MasterServerCommunicator.sendMessageUsingQR() has returned with a result.  The decoded string 
+	 * MessageDecoder.decodedMessage is a public variable that should be displayed on all challenge 
+	 * activities. See MessageDecoder.java for details about messages received from the MasterServer.
 	 */
-	// 
 	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-		super.onActivityResult(requestCode, resultCode, intent);
-		
-		// Extract the Brata tool's result from the intent
-		double value = intent.getDoubleExtra("MEASURE_ANGLE_RESULT", Double.MIN_VALUE);
-		if (Double.MIN_VALUE != value)
-		{
-			Log.d("Brata", "Measured angle is " + value + " CrackTheSafe::onActivityResult().");
-			// Display the value in the appropriate widget
-		} 
-		else 
-		{
-			// Use LogCat output to view the sequence of events using Log statements in Android.  
-			// Open Window > Show View > Other... In the dialog select Android > LogCat and click OK.
-			Log.d("Brata", "Failed to get result in CrackTheSafe::onActivityResult().");
-		}
+	protected void onResume() {
+		super.onResume();
+		// Here update the correct TextView with MessageDecoder.decodedMessage any time the activity is resumed.
 	}
 	
-	
 	/**
-     * This function should be called from the onClickListener of a compute button.  This
-     * function should test all possible 3 permutations of the 5 measured angles on myHash() 
+     * This function should test all possible 3 permutations of the 5 measured angles on myHash() 
      * The correct answer will be a set of 3 digits in a specific order that gets myHash() to 
-     * returns a string matching the 4 character clue. Display the answer on the screen. Once you 
-     * are sure you have the right answer you should send it as a message to the master server.
+     * returns a string matching the 4 character clue. 
      * 
+     * @param clue: the clue to check against
      * @param a-e: the measured angles to check
+     * @return The computed answer as a formatted string
      */
-	public void computeCtsAnswer(int a, int b, int c, int d, int e)
+	public String computeCtsAnswer(String clue, int a, int b, int c, int d, int e)
 	{
-		// Check result from myHash(a, b, c) until it returns the 4 character clue 
+		String result = null;
+		// Check result from myHash(a, b, c) until it returns a string matching the 4 character clue 
+		return result;
 	}
 	
 	/**
@@ -133,50 +96,36 @@ public class CrackTheSafe extends Activity{
 	    return new String( k );
 	}
 
-// May not need this
-//	/**
-//     * Function for calculating and displaying 
-//	 * 
-//	 * @param code: Array of 3 digits in the order needed to generate the clue 
-//	 *        using myHash()
-//     */
-//	void computeAnswer(int[] code)
-//	{
-//		String message = "Insert correctly formatted message containing the code.";
-//		MasterServerCommunicator.sendMessageUsingQR(CrackTheSafe.this, message);
-//	}
-//	
-	
 	/**
      * Display a dialog for confirmation before leaving this activity 
      * using the back button.  The back button with exit this activity
      * eliminating any progress made between challenge checkpoints.
      */
-//	@Override
-//	public void onBackPressed() {
-//		super.onBackPressed();
-//		
-//		// Use the Builder class for convenient dialog construction
-//		// Create the AlertDialog object and return it
-//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//        builder.setTitle("Closing Activity").
-//           setMessage("Any recorded values will be lost!").
-//    	   setPositiveButton("", new DialogInterface.OnClickListener() {
-//              public void onClick(DialogInterface dialog, int id) {
-//                 finish();
-//              }
-//           });
-//        dialog = builder.create();
-//        
-//        // Temporarily disable the affirmative button as a safeguard
-//        Button button = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
-//    	button.setEnabled(false);
-//        Handler handler = new Handler();
-//        handler.postDelayed(new Runnable() {
-//            public void run() {
-//            	Button button = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
-//            	button.setEnabled(true);
-//            }   
-//        }, 1500);
-//	}
+	@Override
+	public void onBackPressed() {
+		// Use the Builder class for convenient dialog construction
+		// Create the AlertDialog object and return it
+        dialog = new AlertDialog.Builder(this)
+        	.setTitle("Close Activity")
+        	.setMessage("Any recorded values will be lost!")
+        	.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+              public void onClick(DialogInterface dialog, int id) {
+                 finish();
+              }
+    		})
+    		.setNegativeButton("No", null)
+    		.create();
+        dialog.show();
+        
+        // Temporarily disable the affirmative button as a safeguard
+        Button button = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+    	button.setEnabled(false);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+            	Button button = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+            	button.setEnabled(true);
+            }   
+        }, 3000);
+	}
 }

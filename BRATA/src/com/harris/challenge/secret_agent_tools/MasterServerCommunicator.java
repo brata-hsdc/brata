@@ -18,9 +18,11 @@ package com.harris.challenge.secret_agent_tools;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.harris.challenge.brata.R;
 import com.harris.challenge.brata.framework.IntentIntegrator;
 import com.harris.challenge.brata.framework.IntentResult;
 import com.harris.challenge.brata.framework.ServerQueryTask;
@@ -91,51 +93,29 @@ public class MasterServerCommunicator extends Activity{
     		return;
     	}
 		
-		Bundle extras = getIntent().getExtras();
-		if (extras == null || extras.getString(MESSAGE_TO_SEND) == null) {
+		String message = getIntent().getStringExtra(MESSAGE_TO_SEND);
+		if (message == null) {
 			Log.w("BRATA", "MasterServerCommunicator  onActivityResult() - "
 					+ "Returned message is null.");
-		     finish();
-		     return;
+			finish();
+			return;
 		}
 		
+		SharedPreferences settings = getSharedPreferences(getResources().getString(R.string.app_name), 0);
+        String teamId = settings.getString(RegistrationTool.TEAM_ID_KEY, "");
+        if(teamId == "")
+        {
+        	Log.w("BRATA", "MasterServerCommunicator  onActivityResult() - "
+					+ "Team ID is invalid.");
+        	finish();
+        	return;
+        }
 		
 		// Get the message to send and the URL from the QR code and 
-		// send message to MasterServer with the team ID
-		String message = extras.getString(MESSAGE_TO_SEND);
-    	String QRMessageUrl = scanResult.getContents();
-    	Log.i("BRATA", "MasterServerCommunicator  onActivityResult() - QRcode result received.");
-    	ServerQueryTask serverQueryTask = new ServerQueryTask(this, QRMessageUrl, RegistrationTool.TeamRegistrationId);
+		// Send message to MasterServer with the team ID
+        Log.i("BRATA", "MasterServerCommunicator  onActivityResult() - QRcode result received.");
+        String QRMessageUrl = scanResult.getContents();
+    	ServerQueryTask serverQueryTask = new ServerQueryTask(this, QRMessageUrl, teamId);
     	serverQueryTask.execute(message);
     }
-
-//	/**
-//	 * Track changes to MasterServer Activity state for troubleshooting
-//	 */
-//	@Override
-//	protected void onPause() {
-//		// Auto-generated method stub
-//		super.onPause();
-//		Log.e("BRATA", "MasterServerCommunicator  onPause");
-//	}
-//	
-//	/**
-//	 * Track changes to MasterServer Activity state for troubleshooting
-//	 */
-//	@Override
-//	protected void onResume() {
-//		// Auto-generated method stub
-//		super.onResume();
-//		Log.e("BRATA", "MasterServerCommunicator  onResume");
-//	}
-//	
-//	/**
-//	 * Track changes to MasterServer Activity state for troubleshooting
-//	 */
-//	@Override
-//	protected void onStop() {
-//		// Auto-generated method stub
-//		super.onStop();
-//		Log.e("BRATA", "MasterServerCommunicator  onStop");
-//	}
 }
