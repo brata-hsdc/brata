@@ -37,7 +37,7 @@ public class HyperMutationBomb extends Activity{
     }
     
     /**
-     * This function should calculate the overall period at which the given the 3 individual measured 
+     * This function should calculate the overall period at which the 3 input measured 
      * periods sync up.  It should return a formated string containing the answer.
      * 
      * @param clue: the clue to check against
@@ -46,8 +46,7 @@ public class HyperMutationBomb extends Activity{
      */
     String computeHmbAnswer(int period1, int period2, int period3)
     {
-        int overall_period = period1 * period2 * period3;
-        String result = String.format("%d:%02d", overall_period/60, overall_period%60);
+        String result = "";
         return result;
     }
     
