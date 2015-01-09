@@ -9,6 +9,33 @@ import android.widget.Button;
 
 import com.harris.challenge.brata.R;
 
+
+/**
+ * Note: 
+ * Some SAT challenges will require you to perform a task by starting a new activity on top of the 
+ * current activity then return to the first activity once finished.  For example, in an activity 
+ * you might start a challenge then use a brata tool to navigate to a location and return the SAT 
+ * activity to proceed with the challenge.
+ * 
+ * Two ways to do this would be to call, from the originating activity, 
+ * 'startActivity(new Intent(this, BrataToolActivity.class))' or 
+ * 'startActivityForResult(BrataToolActivity.class, 0)' if a result is needed.  In response to 
+ * 'startActivityForResult(...)', use 'onActivityResult(..., Intent intent)' in the originating 
+ * activity to retrieve task results from the intent. In either, case after the task is done you 
+ * must call 'finish()' to return to the originating activity.
+ * 
+ * You may pass data to the new activity and/or back to the original activity by inserting data 
+ * into the intent like so:
+ * 
+ * Intent intent = new Intent();
+ * intent.putExtra(<key_string>, "Some data as a string");
+ * 
+ * Within an activity the data can be extracted from the intent like so; (<key_string> must match 
+ * when inserting an extracting data)
+ * 
+ * String data = intent.getStringExtra(<key_string>, ...);
+ */
+
 public class FindTheSecretLaboratory extends Activity{
 	AlertDialog dialog;
 	
