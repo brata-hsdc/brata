@@ -77,12 +77,18 @@ public class ServerQueryTask extends AsyncTask<String, Void, String> {
 		    return encodedResponse;
 		}
 		
-		HttpClient client = new DefaultHttpClient();
-		HttpPost request = new HttpPost(serverUrl);
-		request.addHeader("Content-Type", "application/json");
- 		 
 		try
 		{
+			if (serverUrl == null)
+		    {
+			    Log.w("BRATA", "ServerQueryTask  doInBackground() - "
+						+ "Server url is null");
+			    return encodedResponse;
+		    }
+			
+			HttpClient client = new DefaultHttpClient();
+			HttpPost request = new HttpPost(serverUrl);
+			request.addHeader("Content-Type", "application/json");
 			request.setEntity(new StringEntity(requestBody.toString(0)));
 			
 			HttpResponse response = client.execute(request);
@@ -162,7 +168,10 @@ public class ServerQueryTask extends AsyncTask<String, Void, String> {
     			+ " - Message from server: " + result;
 		Log.d("BRATA", dbgMsg);
 		
-		MessageDecoder.decodeResponse(result);
+		if(result != null && result.length() > 0)
+		{
+			MessageDecoder.decodeResponse(result);
+		}
 
 		callingActivity.finish();
 	}
