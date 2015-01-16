@@ -29,6 +29,7 @@ import com.harris.challenge.brata.R;
  * 
  * Intent intent = new Intent();
  * intent.putExtra(<key_string>, "Some data as a string");
+ * setResult(RESULT_OK, intent);
  * 
  * Within an activity the data can be extracted from the intent like so; (<key_string> must match 
  * when inserting an extracting data)
@@ -93,6 +94,6 @@ public class FindTheSecretLaboratory extends Activity{
             	Button button = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
             	button.setEnabled(true);
             }   
-        }, 3000);
+        }, 2000);
 	}
 }

@@ -80,6 +80,6 @@ public class HyperMutationBomb extends Activity{
                 Button button = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
                 button.setEnabled(true);
             }   
-        }, 3000);
+        }, 2000);
     }
 }
