@@ -69,21 +69,21 @@
         <activity android:name="com.harris.challenge.incidents.DudeMyCar" >
         </activity>
         
-        <activity android:name="com.harris.challenge.brata.SATChallengeLauncherActivity" >
-        </activity>
+        <activity android:name="com.harris.challenge.brata.SATChallengeLauncherActivity" 
+            android:screenOrientation="portrait"/>
         <activity android:name="com.harris.challenge.secret_agent_tools.MasterServerCommunicator" 
-            android:theme="@style/Theme.Transparent">
-        </activity>
-        <activity android:name="com.harris.challenge.secret_agent_tools.RegistrationTool" >
-        </activity>
-        <activity android:name="com.harris.challenge.secret_agent_tools.CrackTheSafe" >
-        </activity>
-        <activity android:name="com.harris.challenge.secret_agent_tools.HyperMutationBomb" >
-        </activity>
-        <activity android:name="com.harris.challenge.secret_agent_tools.FindTheSecretLaboratory" >
-        </activity>
-        <activity android:name="com.harris.challenge.secret_agent_tools.CaptureProfessorAardvark" >
-        </activity>
+            android:theme="@style/Theme.Transparent"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.harris.challenge.secret_agent_tools.RegistrationTool" 
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.harris.challenge.secret_agent_tools.CrackTheSafe" 
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.harris.challenge.secret_agent_tools.HyperMutationBomb" 
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.harris.challenge.secret_agent_tools.FindTheSecretLaboratory" 
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.harris.challenge.secret_agent_tools.CaptureProfessorAardvark" 
+            android:screenOrientation="portrait"/>
         
        
 
