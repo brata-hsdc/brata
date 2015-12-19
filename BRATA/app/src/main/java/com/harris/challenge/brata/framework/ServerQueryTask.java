@@ -29,6 +29,11 @@ public class ServerQueryTask extends AsyncTask<String, Void, String> {
     protected ProgressDialog dialog;
 	protected String serverUrl;
 	protected String teamId;
+
+    // regCode needs to be persistent across the lifetime of the application.
+    // There is probably a better way to do that than making this a static
+    // member, but this keeps all the changes in this class for now.
+    protected static String regCode;
 	
 	public ServerQueryTask(Activity activity, String url, String teamId)
 	{
@@ -61,7 +66,8 @@ public class ServerQueryTask extends AsyncTask<String, Void, String> {
     			+ " - Sending message to MasterServer"
     			+ " - \nURL:" + serverUrl 
     			+ " - \nMessage: " + params[0] 
-    			+ " - \nTeamID:" + teamId;
+    			+ " - \nTeamID:" + teamId
+                + " - \nRegCode:" + regCode;
 		Log.d("BRATA", dbgMsg);
 		
 		JSONObject requestBody = new JSONObject();
@@ -69,6 +75,11 @@ public class ServerQueryTask extends AsyncTask<String, Void, String> {
 		{
 			requestBody.put("team_id", teamId);
 			requestBody.put("message", params[0]);
+            
+            // Send reg_code to the server.
+            // The server may send back a new one.
+            // If it does, save it.
+			requestBody.put("reg_code", regCode);
 		}
 		catch (JSONException e)
 		{
@@ -126,6 +137,12 @@ public class ServerQueryTask extends AsyncTask<String, Void, String> {
 						+ " --- " + out.toString());
 		        JSONObject responseBody = new JSONObject(out.toString());
 		        encodedResponse = responseBody.getString("message");
+                
+                // If the message has a reg_code, save it
+                if (responsBody.has("reg_code"))
+                {
+                    regCode = responseBody.getString("reg_code");
+                }
 		    }
 		}
 		catch (IllegalStateException e)
