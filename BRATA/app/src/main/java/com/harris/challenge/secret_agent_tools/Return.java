@@ -1,16 +1,19 @@
 package com.harris.challenge.secret_agent_tools;
 
-import com.harris.challenge.brata.R;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.widget.Button;
 
-public class HyperMutationBomb extends Activity{
+import com.harris.challenge.brata.R;
+
+
+public class Return extends Activity{
     AlertDialog dialog;
+    Button buttonStartChallenge;
     
     /**
      * Function used for initializing activity variables, such as 
@@ -20,7 +23,24 @@ public class HyperMutationBomb extends Activity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // load the xml layout before initializing widgets
-        setContentView(R.layout.activity_hypermutation_bomb);
+        setContentView(R.layout.activity_return);
+
+        buttonStartChallenge = (Button)findViewById(R.id.buttonReturnStartChallenge);
+        buttonStartChallenge.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /**
+                 * Either of these functions can be used to send and/or get messages from the MasterServer.
+                 * 
+                 * MasterServerCommunicator.getInstructionUsingQR(ActivityName.this);
+                 * MasterServerCommunicator.sendMessageUsingQR(ActivityName.this, message);
+                 * 
+                 * In this case the MasterServer will update your progress and send back a clue that must
+                 * be decoded. 
+                 */
+                MasterServerCommunicator.getInstructionUsingQR(Return.this);
+            }
+        });
     }
     
     /**
@@ -35,21 +55,7 @@ public class HyperMutationBomb extends Activity{
         super.onResume();
         // Here update the correct TextView with MessageDecoder.decodedMessage any time the activity is resumed.
     }
-    
-    /**
-     * This function should calculate the overall period at which the 3 input measured 
-     * periods sync up.  It should return a formated string containing the answer.
-     * 
-     * @param clue: the clue to check against
-     * @param a-e: the measured angles to check
-     * @return The computed answer as a formatted string
-     */
-    String computeHmbAnswer(int period1, int period2, int period3)
-    {
-        String result = "";
-        return result;
-    }
-    
+
     /**
      * Display a dialog for confirmation before leaving this activity 
      * using the back button.  The back button with exit this activity

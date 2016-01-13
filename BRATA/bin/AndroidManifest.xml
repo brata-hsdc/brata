@@ -76,13 +76,13 @@
         </activity>
         <activity android:name="com.harris.challenge.secret_agent_tools.RegistrationTool" >
         </activity>
-        <activity android:name="com.harris.challenge.secret_agent_tools.CrackTheSafe" >
+        <activity android:name="com.harris.challenge.secret_agent_tools.Return" >
         </activity>
-        <activity android:name="com.harris.challenge.secret_agent_tools.HyperMutationBomb" >
+        <activity android:name="com.harris.challenge.secret_agent_tools.Dock" >
         </activity>
-        <activity android:name="com.harris.challenge.secret_agent_tools.FindTheSecretLaboratory" >
+        <activity android:name="com.harris.challenge.secret_agent_tools.Launch" >
         </activity>
-        <activity android:name="com.harris.challenge.secret_agent_tools.CaptureProfessorAardvark" >
+        <activity android:name="com.harris.challenge.secret_agent_tools.Secure" >
         </activity>
         
        

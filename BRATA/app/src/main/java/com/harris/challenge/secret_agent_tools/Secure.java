@@ -6,10 +6,11 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Button;
+import com.harris.challenge.brata.framework.AudioSample; // needed to collect audio sample
 
 import com.harris.challenge.brata.R;
 
-public class CaptureProfessorAardvark extends Activity{
+public class Secure extends Activity{
 	AlertDialog dialog;
 	
 	/**
@@ -20,7 +21,7 @@ public class CaptureProfessorAardvark extends Activity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // load the xml layout before initializing widgets
-        setContentView(R.layout.activity_capture_professor_aardvark);
+        setContentView(R.layout.activity_secure);
     }
     
 	/**

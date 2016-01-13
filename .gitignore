@@ -38,7 +38,7 @@ captures/
 # to the windows way and then setting git to ignore them from now on
 # if you need to make a change tho these files comment out this line
 # but then include .idea/workspace.xml as that file is only user specific.
-.idea/
+BRATA/.idea/
 
 # Windows thumbnail db
 Thumbs.db
