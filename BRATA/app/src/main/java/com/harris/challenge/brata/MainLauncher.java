@@ -18,11 +18,15 @@ package com.harris.challenge.brata;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
+
+import com.harris.challenge.brata.framework.ServerQueryTask;
 
 
 public class MainLauncher extends Activity implements OnClickListener{
@@ -38,7 +42,7 @@ public class MainLauncher extends Activity implements OnClickListener{
 	        super.onCreate(savedInstanceState);
 	        requestWindowFeature(Window.FEATURE_NO_TITLE);
 	        setContentView(R.layout.activity_main_launcher);
-	        
+
 	        //setup buttons
 	        incidentsLauncher = (TextView) findViewById(R.id.launchIndicents);
 	        brataToolsLauncher = (TextView) findViewById(R.id.launchTools);
@@ -48,7 +52,6 @@ public class MainLauncher extends Activity implements OnClickListener{
 	        incidentsLauncher.setOnClickListener(this);
 	        brataToolsLauncher.setOnClickListener(this);
 	        secretAgentToolsLauncher.setOnClickListener(this);
-	        
 	  }
 
 	@Override
@@ -69,5 +72,4 @@ public class MainLauncher extends Activity implements OnClickListener{
 		}
 		
 	}
-
 }

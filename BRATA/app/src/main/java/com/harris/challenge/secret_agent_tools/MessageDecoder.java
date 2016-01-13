@@ -39,7 +39,7 @@ public class MessageDecoder {
      * Each team must implement this function.
      * 
      * Example:
-     * decodeResponse("U__sFLeou_rktcehe!e,~"); should return a result of "Use_the_Force,_Luke!~"
+     * See the specification document of this year's competition
      */
     public static String decodeResponse(String encodedString)
     {
