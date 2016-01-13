@@ -27,7 +27,7 @@
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="30dp" >
+        android:layout_marginTop="10dp" >
 
         <TextView
             android:id="@+id/textView1"
@@ -35,21 +35,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_weight="1"
-            android:text="Enter your team ID:"
+            android:text="Click button and scan the team&apos;s registration QR code"
             android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        <EditText
-            android:id="@+id/editText_TeamId"
-            android:layout_width="78dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_weight="0.96"
-            android:ems="10"
-            android:inputType="number"
-            android:maxLength="5" >
-
-            <requestFocus />
-        </EditText>
 
     </LinearLayout>
 
@@ -63,10 +50,9 @@
             android:id="@+id/button_SubmitTeamID"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="1"
-            android:text="Submit Team ID"
+            android:text="Register Team"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -74,7 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="10dp"
         android:layout_weight="0.0"
         android:gravity="bottom"
         android:orientation="vertical" >

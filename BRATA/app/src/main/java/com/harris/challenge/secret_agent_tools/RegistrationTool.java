@@ -17,31 +17,20 @@
 package com.harris.challenge.secret_agent_tools;
 
 import android.app.Activity;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.harris.challenge.brata.R;
 
 public class RegistrationTool extends Activity {
-    
-    /**
-     * Variable for holding the teams 5 digit ID; 
-     * Publicly accessible to other activities
-     */
-    public String TeamRegistrationId = "";
-    public static String TEAM_ID_KEY = "TeamID";
+
     
     /**
      * Registration tool widgets 
      */
-    EditText editTextTeamId;
     Button buttonSubmitRegistration;
     TextView textEncodedMessage;
     TextView textDecodedMessage;
@@ -58,41 +47,15 @@ public class RegistrationTool extends Activity {
         textEncodedMessage.setText( MessageDecoder.encodedMessage);
         textDecodedMessage = (TextView)findViewById(R.id.text_decodedMsg);
         textDecodedMessage.setText( MessageDecoder.decodedMessage);
-
-        editTextTeamId = (EditText)findViewById(R.id.editText_TeamId);
-        editTextTeamId.addTextChangedListener(new TextWatcher() {
-            
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // Auto-generated method stub
-                TeamRegistrationId = s.toString();
-                buttonSubmitRegistration.setEnabled(s.length() == 5);
-            }
-            
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // Auto-generated method stub
-                
-            }
-            
-            @Override
-            public void afterTextChanged(Editable s) {
-                // Auto-generated method stub
-                
-            }
-        });
-        
         
         buttonSubmitRegistration = (Button)findViewById(R.id.button_SubmitTeamID);
-        buttonSubmitRegistration.setEnabled(false);
+        buttonSubmitRegistration.setEnabled(true);
         buttonSubmitRegistration.setOnClickListener(new Button.OnClickListener() {
             
             @Override
             public void onClick(View v) {
-                // Auto-generated method stub
-                SharedPreferences.Editor editor = getSharedPreferences("BRATA", 0).edit();
-                editor.putString(TEAM_ID_KEY, TeamRegistrationId);
-                editor.commit();
+                // Register via scan of registraation QR code
+
                 MasterServerCommunicator.getInstructionUsingQR(RegistrationTool.this);
             }
         });

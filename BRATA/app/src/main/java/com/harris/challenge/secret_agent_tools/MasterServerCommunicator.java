@@ -100,22 +100,13 @@ public class MasterServerCommunicator extends Activity{
             finish();
             return;
         }
-        
-        SharedPreferences settings = getSharedPreferences(getResources().getString(R.string.app_name), 0);
-        String teamId = settings.getString(RegistrationTool.TEAM_ID_KEY, "");
-        if(teamId == "")
-        {
-            Log.w("BRATA", "MasterServerCommunicator  onActivityResult() - "
-                    + "Team ID is invalid.");
-            finish();
-            return;
-        }
+
         
         // Get the message to send and the URL from the QR code and 
         // Send message to MasterServer with the team ID
         Log.i("BRATA", "MasterServerCommunicator  onActivityResult() - QRcode result received.");
         String QRMessageUrl = scanResult.getContents();
-        ServerQueryTask serverQueryTask = new ServerQueryTask(this, QRMessageUrl, teamId);
+        ServerQueryTask serverQueryTask = new ServerQueryTask(this, QRMessageUrl);
         serverQueryTask.execute(message);
     }
 }
