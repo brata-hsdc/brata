@@ -16,27 +16,48 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.harris.challenge.brata.R;
 import com.harris.challenge.secret_agent_tools.MessageDecoder;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 
 public class ServerQueryTask extends AsyncTask<String, Void, String> {
 
+	/**
+	 * Variable for holding the teams registration code
+	 * The use of this is now abstracted from the user other than providing storage context
+	 */
+	private String TeamRegCode = "";
+	private static String REG_CODE_KEY = "RegCode";
+
 	protected Activity callingActivity;
     protected ProgressDialog dialog;
 	protected String serverUrl;
-	protected String teamId;
-	
-	public ServerQueryTask(Activity activity, String url, String teamId)
+	protected String regCode;
+
+	public ServerQueryTask(Activity activity, String url)
 	{
 		this.callingActivity = activity;
 		serverUrl = url;
-		this.teamId = teamId;
+
+		// in case the app restarted need to attempt to recover the regcode
+		SharedPreferences settings = activity.getSharedPreferences(activity.getResources().getString(R.string.app_name), 0);
+		if(settings.contains(REG_CODE_KEY)){
+			// restore the last known value
+			regCode = settings.getString(REG_CODE_KEY, "");
+		}
+		else {
+			// Initialize storage of the regCode
+			SharedPreferences.Editor editor = settings.edit();
+			editor.putString(REG_CODE_KEY, "");
+			editor.commit();
+		}
 	}
-	
+
 	@Override
     protected void onPreExecute() {
 
@@ -60,15 +81,21 @@ public class ServerQueryTask extends AsyncTask<String, Void, String> {
 		String dbgMsg = "ServerQueryTask  doInBackground()"
     			+ " - Sending message to MasterServer"
     			+ " - \nURL:" + serverUrl 
-    			+ " - \nMessage: " + params[0] 
-    			+ " - \nTeamID:" + teamId;
+    			+ " - \nmessage: " + params[0]
+                + " - \nreg_code:" + regCode
+                + " - \nbrata_version:2016";
 		Log.d("BRATA", dbgMsg);
 		
 		JSONObject requestBody = new JSONObject();
 		try
 		{
-			requestBody.put("team_id", teamId);
 			requestBody.put("message", params[0]);
+            
+            // Send reg_code to the server.
+            // The server may send back a new one.
+            // If it does, save it.
+			requestBody.put("reg_code", regCode);
+            requestBody.put("brata_version", "2016");
 		}
 		catch (JSONException e)
 		{
@@ -126,6 +153,21 @@ public class ServerQueryTask extends AsyncTask<String, Void, String> {
 						+ " --- " + out.toString());
 		        JSONObject responseBody = new JSONObject(out.toString());
 		        encodedResponse = responseBody.getString("message");
+                
+                // If the message has a reg_code, save it
+                if (responseBody.has("reg_code"))
+                {
+					// but only save it if it actually changed
+					String tmpRegCode = responseBody.getString("reg_code");
+					if(!regCode.equals(tmpRegCode)) {
+						regCode = tmpRegCode;
+						SharedPreferences.Editor editor = callingActivity.getSharedPreferences(
+								callingActivity.getResources().getString(R.string.app_name), 0).
+								edit();
+						editor.putString(REG_CODE_KEY, regCode);
+						editor.commit();
+					}
+                }
 		    }
 		}
 		catch (IllegalStateException e)
