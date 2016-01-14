@@ -23,26 +23,7 @@
     </layouts>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="db35cc31-7228-48ef-a335-e4ae196f49e6" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/harris/challenge/brata/framework/AudioSample.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/harris/challenge/secret_agent_tools/CaptureProfessorAardvark.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/harris/challenge/secret_agent_tools/Secure.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/harris/challenge/secret_agent_tools/CrackTheSafe.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/harris/challenge/secret_agent_tools/Return.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/harris/challenge/secret_agent_tools/FindTheSecretLaboratory.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/harris/challenge/secret_agent_tools/Launch.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/harris/challenge/secret_agent_tools/HyperMutationBomb.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/harris/challenge/secret_agent_tools/Dock.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_capture_professor_aardvark.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_secure.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_crack_the_safe.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_return.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_find_the_secret_laboratory.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_launch.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_hypermutation_bomb.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_dock.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.gitignore" afterPath="$PROJECT_DIR$/../.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/AndroidManifest.xml" afterPath="$PROJECT_DIR$/bin/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/harris/challenge/brata/SATChallengeLauncherActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/harris/challenge/brata/SATChallengeLauncherActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_19_1_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_v4_19_1_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="db35cc31-7228-48ef-a335-e4ae196f49e6" name="Default" comment="" />
     <ignored path="BRATA.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
