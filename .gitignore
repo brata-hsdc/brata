@@ -34,11 +34,11 @@ captures/
 # Android Studio Project files
 # Note there is no good way around this the files here are important
 # however they are slightly different for mac vs the default windows
-# configuration we gave the schools to use, so putting the fiels back
-# to the windows way and then setting git to ignore them from now on
-# if you need to make a change tho these files comment out this line
-# but then include .idea/workspace.xml as that file is only user specific.
-BRATA/.idea/
+# configuration we gave the schools to use, so putting the files back
+# to the windows way.  We have tested this on a mac and when first 
+# opened let the project rebuild.  You may need to go into
+# project structure and manually fix the java path to your environment
+# BRATA/.idea/
 
 # Windows thumbnail db
 Thumbs.db
