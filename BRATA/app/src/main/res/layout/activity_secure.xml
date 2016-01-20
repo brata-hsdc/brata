@@ -12,15 +12,15 @@
         android:layout_centerInParent="true"
         android:textAppearance="@android:style/TextAppearance.Large"
         android:layout_margin="8dip"
-        android:text="FSL"
+        android:text="Secure"
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/buttonFslStartChallenge"
+        android:id="@+id/buttonCpaStartChallenge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView1"
         android:layout_toLeftOf="@+id/textView1"
         android:text="Start Challenge" />
-    
+
 </RelativeLayout>

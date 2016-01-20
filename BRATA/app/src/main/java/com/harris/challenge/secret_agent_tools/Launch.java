@@ -37,7 +37,7 @@ import com.harris.challenge.brata.R;
  * String data = intent.getStringExtra(<key_string>, ...);
  */
 
-public class FindTheSecretLaboratory extends Activity{
+public class Launch extends Activity{
 	AlertDialog dialog;
 	
 	/**
@@ -48,7 +48,7 @@ public class FindTheSecretLaboratory extends Activity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // load the xml layout before initializing widgets
-        setContentView(R.layout.activity_find_the_secret_laboratory);
+        setContentView(R.layout.activity_launch);
     }
     
 	/**
